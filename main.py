@@ -38,7 +38,7 @@ menu_bar.add_command(label="Sair", command=sair)
 
 root.config(menu=menu_bar)
 
-logo = PhotoImage(file="logo.png")
+logo = PhotoImage(file="assets/logo.png")
 label_logo = tk.Label(root, image=logo, bg="#1f286d")
 label_logo.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
