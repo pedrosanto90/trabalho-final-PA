@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import PhotoImage
+from database.database import *
+
+main()
 
 def sair():
     root.quit()
