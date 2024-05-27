@@ -110,3 +110,5 @@ def create_tables():
 def main():
     connect()
     create_tables()
+
+main()
