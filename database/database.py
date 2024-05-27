@@ -42,20 +42,20 @@ def create_tables():
 
     # creating tables
 
-    mycursor.execute('CREATE TABLE clients (client_id INT AUTO)INCREMENT PRIMARY KEY, \
+    mycursor.execute('CREATE TABLE clients (client_id INT AUTO_INCREMENT PRIMARY KEY, \
     client_name VARCHAR(256), \
     client_address VARCHAR(256), \
     client_nif INT(9), \
     client_mobile VARCHAR(15), \
     client_email VARCHAR(50), \
-    client_created')
+    client_created DATE)')
 
-    mycursor.execute('CREATING TABLE vehicles (vehicle_id INT AUTO INCREMENT PRIMARY KEY, \
+    mycursor.execute('CREATE TABLE vehicles (vehicle_id INT AUTO_INCREMENT PRIMARY KEY, \
     vehicle_client_id INT NOT NULL, \
     vehicle_registration VARCHAR(6), \
     vehicle_brand VARCHAR(50), \
     vehicle_model VARCHAR(50), \
-    vehicle_registration_date DATE')
+    vehicle_registration_date DATE)')
 
     mycursor.execute('CREATE TABLE service_types (service_type_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_type_description VARCHAR(50))')
@@ -89,6 +89,12 @@ def create_tables():
     FOREIGN KEY(payment_service_id) REFERENCES services(services_id), \
     FOREIGN KEY(payment_state) REFERENCES payment_states(payment_state_id))')
 
+    mycursor.execute('CREATE TABLE reports (report_id INT AUTO_INCREMENT PRIMARY KEY, \
+    report_service_id INT NOT NULL, \
+    report_insurance_id INT NOT NULL, \
+    report_date date, \
+    report_refund_value FLOAT)')
+
     # TODO - rever tabela
     mycursor.execute('CREATE TABLE insurances (insurance_id INT AUTO_INCREMENT PRIMARY KEY, \
     insurance_name VARCHAR(50), \
@@ -99,14 +105,20 @@ def create_tables():
     insurance_vehicle_id INT NOT NULL, \
     insurance_service_id INT NOT NULL, \
     insurance_report_id INT NOT NULL, \
-    FOREIGN KEY(insurance_client_id)')
+    FOREIGN KEY(insurance_client_id) REFERENCES clients(client_id), \
+    FOREIGN KEY(insurance_vehicle_id) REFERENCES vehicles(vehicle_id), \
+    FOREIGN KEY(insurance_service_id) REFERENCES services(services_id), \
+    FOREIGN KEY(insurance_report_id) REFERENCES reports(report_id))')
 
-    mycursor.execute('CREATE TABLE reports (report_id INT AUTO_INCREMENT PRIMARY KEY, \
-    service_id INT, insurance_id INT, report_date DATE, refund_value INT, \
-    FOREIGN KEY(service_id) REFERENCES services(services_id), \
-    FOREIGN KEY(insurance_id) REFERENCES insurances(insurance_id))')
+
+    mycursor.execute('CREATE TABLE users (user_id INT AUTO_INCREMENT PRIMARY KEY, \
+    user_name VARCHAR(50), \
+    user_fullname VARCHAR(256), \
+    user_image VARCHAR(256), \
+    user_password VARCHAR(64))')
     
-
 def main():
     connect()
     create_tables()
+
+main()
