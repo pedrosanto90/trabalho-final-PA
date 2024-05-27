@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from src.takePic import takePic
+from takePic import takePic
 
 root = tk.Tk()
 root.title("Norauto - Login")

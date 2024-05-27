@@ -50,7 +50,7 @@ encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
 # Start webcam
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 while True:
     success, img = cap.read()

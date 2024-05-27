@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from database.database import *
+from database import *
 
-main()
+try:
+    connect()
+except:
+    create_db()
 
 def sair():
     root.quit()

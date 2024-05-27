@@ -6,17 +6,13 @@ load_dotenv()
 PASSWORD = os.getenv('PASSWORD')
 
 def connect():
-    try:
-        mydb = mysql.connector.connect( 
-            host="localhost",
-            user="root",
-            passwd=PASSWORD,
-            database="trabalho_final"
-        )
-        print('Database connected!')
-    except:
-        create_db()
-        
+    mysql.connector.connect( 
+        host="localhost",
+        user="root",
+        passwd=PASSWORD,
+        database="trabalho_final"
+    )
+    print('Database connected!')
 
 def create_db():
         mydb = mysql.connector.connect( 
@@ -117,8 +113,4 @@ def create_tables():
     user_image VARCHAR(256), \
     user_password VARCHAR(64))')
     
-def main():
-    connect()
-    create_tables()
 
-main()
