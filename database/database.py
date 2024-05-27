@@ -79,14 +79,27 @@ def create_tables():
     mycursor.execute('CREATE TABLE payment_states (payment_state_id INT AUTO_INCREMENT PRIMARY KEY, \
     payment_state_description VARCHAR(50))')
 
+    mycursor.execute('CREATE TABLE payments_type (payment_type_id INT AUTO_INCREMENT PRIMARY KEY, \
+    payment_type_description VARCHAR(50))')
+
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
     payment_service_id INT, payment_date DATE, payment_value INT, payment_state INT, \
+    payment_type INT NOT NULL, \
+    FOREIGN KEY(payment_type) REFERENCES payments_type(payment_type_id), \
     FOREIGN KEY(payment_service_id) REFERENCES services(services_id), \
     FOREIGN KEY(payment_state) REFERENCES payment_states(payment_state_id))')
 
     # TODO - rever tabela
     mycursor.execute('CREATE TABLE insurances (insurance_id INT AUTO_INCREMENT PRIMARY KEY, \
-    insurance_description VARCHAR(50))')
+    insurance_name VARCHAR(50), \
+    insurance_phone VARCHAR(15), \
+    insurance_email VARCHAR(50), \
+    insurance_address VARCHAR(256), \
+    insurance_client_id INT NOT NULL, \
+    insurance_vehicle_id INT NOT NULL, \
+    insurance_service_id INT NOT NULL, \
+    insurance_report_id INT NOT NULL, \
+    FOREIGN KEY(insurance_client_id)')
 
     mycursor.execute('CREATE TABLE reports (report_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_id INT, insurance_id INT, report_date DATE, refund_value INT, \
