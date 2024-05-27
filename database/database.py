@@ -40,14 +40,22 @@ def create_tables():
 
     mycursor = mydb.cursor()
 
-    # create tables
-    mycursor.execute('CREATE TABLE clients (client_id INT AUTO_INCREMENT PRIMARY KEY, \
-    client_name VARCHAR(255), client_address VARCHAR(255), client_nif INT(9), \
-    client_phone INT(9), client_email VARCHAR(50), client_registration_date DATE)')
+    # creating tables
 
-    mycursor.execute('CREATE TABLE vehicles (vehicle_id INT AUTO_INCREMENT PRIMARY KEY, \
-    vehicle_client_id INT, vehicle_registration VARCHAR(8), vehicle_brand VARCHAR(50), \
-    vehicle_model VARCHAR(50), FOREIGN KEY(vehicle_client_id) REFERENCES clients(client_id))')
+    mycursor.execute('CREATE TABLE clients (client_id INT AUTO)INCREMENT PRIMARY KEY, \
+    client_name VARCHAR(256), \
+    client_address VARCHAR(256), \
+    client_nif INT(9), \
+    client_mobile VARCHAR(15), \
+    client_email VARCHAR(50), \
+    client_created')
+
+    mycursor.execute('CREATING TABLE vehicles (vehicle_id INT AUTO INCREMENT PRIMARY KEY, \
+    vehicle_client_id INT NOT NULL, \
+    vehicle_registration VARCHAR(6), \
+    vehicle_brand VARCHAR(50), \
+    vehicle_model VARCHAR(50), \
+    vehicle_registration_date DATE')
 
     mycursor.execute('CREATE TABLE service_types (service_type_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_type_description VARCHAR(50))')
@@ -57,8 +65,12 @@ def create_tables():
 
     mycursor.execute('CREATE TABLE services (services_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_client_id INT, \
-    services_vehicle_id INT, service_type INT, service_description VARCHAR(1024), \
-    service_start_date DATE, service_end_date DATE, service_state INT, service_price INT, \
+    services_vehicle_id INT, service_type INT, \
+    service_description VARCHAR(1024), \
+    service_start_date DATE, \
+    service_end_date DATE, \
+    service_state INT, \
+    service_price INT, \
     FOREIGN KEY(services_vehicle_id) REFERENCES vehicles(vehicle_id), \
     FOREIGN KEY(service_type) REFERENCES service_types(service_type_id), \
     FOREIGN KEY(service_client_id) REFERENCES clients(client_id), \

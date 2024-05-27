@@ -6,7 +6,7 @@ from datetime import datetime
 # from PIL import ImageGrab
 
 # Define path to images
-path = './images'
+path = '../images'
 images = []
 classNames = []
 myList = os.listdir(path)
@@ -50,7 +50,7 @@ encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
 # Start webcam
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 while True:
     success, img = cap.read()
