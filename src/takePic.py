@@ -1,31 +1,18 @@
-import cv2
+from cv2 import *
 
-# Take picture from webcam
-def takePic():
-    cap = cv2.VideoCapture(1)  # Open the webcam (use 0 if 1 does not work)
-    if not cap.isOpened():
-        print("Error: Could not open video device.")
-        return
+cam_port = 0
+cam = VideoCapture(cam_port) 
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            print("Error: Could not read frame.")
-            break
-        
-        # Display the frame
-        cv2.imshow('Webcam', frame)
+result, image = cam.read() 
 
-        # Wait for a key press
-        key = cv2.waitKey(1)
-        if key != -1:  # If a key is pressed
-            # Save the frame as an image
-            cv2.imwrite("pedro.png", frame)
-            print("Image saved as 'pedro.png'")
-            break
+if result: 
 
-    # Release the webcam and close the display window
-    cap.release()
-    cv2.destroyAllWindows()
+    imshow("GeeksForGeeks", image) 
 
-takePic()
+    imwrite("GeeksForGeeks.png", image) 
+
+    waitKey(0) 
+    destroyWindow("GeeksForGeeks") 
+
+else: 
+    print("No image detected. Please! try again")
