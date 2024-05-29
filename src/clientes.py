@@ -6,6 +6,7 @@ from datetime import datetime
 
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")
+
 def create_client(client_name, client_address, client_nif, client_mobile, client_email):
     try:
         # Conexão com o banco de dados
@@ -41,3 +42,6 @@ def create_client(client_name, client_address, client_nif, client_mobile, client
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+
+create_client('Nome Completo', 'Endereço Exemplo, 123', '123456789', '912345678', 'cliente@example.com')
+
