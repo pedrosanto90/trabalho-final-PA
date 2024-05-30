@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import PhotoImage
 from src.database.database import *
+from users import *
 
 try:
     connect()
@@ -19,7 +20,7 @@ menu_bar = tk.Menu(root, tearoff=0)
 
 menu_utilizadores = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Utilizadores", menu=menu_utilizadores)
-menu_utilizadores.add_command(label="Adicionar")
+menu_utilizadores.add_command(label="Adicionar", command=add_user)
 menu_utilizadores.add_command(label="Remover")
 
 menu_clientes = tk.Menu(menu_bar, tearoff=0)

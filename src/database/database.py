@@ -112,5 +112,3 @@ def create_tables():
     user_fullname VARCHAR(256), \
     user_image VARCHAR(256), \
     user_password VARCHAR(64))')
-    
-
