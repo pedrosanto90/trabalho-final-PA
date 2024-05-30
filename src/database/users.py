@@ -36,5 +36,3 @@ def create_user(user_name, user_fullname, user_password):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
-
-create_user('pedrosanto', 'Pedro Espirito Santo', '123456789')
