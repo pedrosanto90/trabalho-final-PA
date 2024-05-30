@@ -44,5 +44,40 @@ def create_client(client_name, client_address, client_nif, client_mobile, client
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-create_client('Nome Completo', 'Endereço Exemplo, 123', '123456789', '912345678', 'cliente@example.com')
+def update_client(client_address, client_mobile, client_email, client_id):
+    try:
+        # Conexão com o banco de dados
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
 
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # Consulta SQL para atualizar um cliente
+            update_query = """
+                UPDATE clients
+                SET client_address = %s, client_mobile = %s, client_email = %s
+                WHERE client_id = %s
+                """
+            record = (client_address, client_mobile, client_email, client_id)
+
+            # Executar a consulta
+            cursor.execute(update_query, record)
+            connection.commit()
+            print("Cliente atualizado com sucesso.")
+    
+    except Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
+
+update_client('Rua 1', '333333333', 'a@a.com', 1)
