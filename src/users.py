@@ -2,7 +2,6 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 from mysql.connector import Error
-from datetime import datetime
 
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")
@@ -22,8 +21,9 @@ def create_user(user_name, user_fullname, user_password):
             # Consulta SQL para inserir um novo cliente
             insert_query = 'INSERT INTO users (user_name, user_fullname, user_password) \
                 VALUES (%s, %s, %s)'
-            record = (user_name, user_fullname, user_password)
+
             # TODO: adicionar bcrypt para guardar as passwords
+            record = (user_name, user_fullname, user_password)
 
             cursor.execute(insert_query, record)
             connection.commit()

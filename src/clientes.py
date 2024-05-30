@@ -35,8 +35,9 @@ def create_client(client_name, client_address, client_nif, client_mobile, client
             connection.commit()
             print("Cliente inserido com sucesso.")
 
-    except Error as erro:
-        print("Erro ao conectar ao MySQL:", erro)
+    except Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+
     finally:
         if connection.is_connected():
             cursor.close()
