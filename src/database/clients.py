@@ -79,5 +79,3 @@ def update_client(client_address, client_mobile, client_email, client_id):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
-
-update_client('Rua 1', '333333333', 'a@a.com', 1)
