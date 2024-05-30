@@ -30,7 +30,7 @@ def findEncodings(images):
 
 # Function to mark attendance
 def markAttendance(name):
-    with open('Attendance.csv', 'r+') as f:
+    with open('Attendance.csv', 'a+') as f:
         myDataList = f.readlines()
         nameList = [line.split(',')[0] for line in myDataList]
         
@@ -50,7 +50,7 @@ encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
 # Start webcam
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 while True:
     success, img = cap.read()
