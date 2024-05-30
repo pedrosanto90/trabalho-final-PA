@@ -1,18 +1,29 @@
-from cv2 import *
+import cv2
 
-cam_port = 0
-cam = VideoCapture(cam_port) 
+def takePic():
+    cam_port = 1
+    cam = cv2.VideoCapture(cam_port) 
 
-result, image = cam.read() 
+    while True:
+        # Captura um frame da câmera
+        ret, frame = cam.read() 
 
-if result: 
+        # Exibe o frame em tempo real
+        cv2.imshow("Camera", frame) 
 
-    imshow("GeeksForGeeks", image) 
+        # Aguarda a entrada do teclado por um curto período de tempo
+        key = cv2.waitKey(1)
 
-    imwrite("GeeksForGeeks.png", image) 
+        # Se a tecla 's' for pressionada (código ASCII 115)
+        if key == 115:
+            # Salva o frame como imagem
+            cv2.imwrite("test.png", frame)
+            print("Foto tirada!")
+            break  # Sai do loop
 
-    waitKey(0) 
-    destroyWindow("GeeksForGeeks") 
+        # Se a tecla 'q' for pressionada (código ASCII 113)
+        if key == 113:
+            break  # Sai do loop
 
-else: 
-    print("No image detected. Please! try again")
+    cv2.destroyAllWindows()
+
