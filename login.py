@@ -7,7 +7,7 @@ root.title("Norauto - Login")
 root.geometry("600x400")
 root.configure(bg="#1f286d")
 
-logo = PhotoImage(file="../assets/logo.png")
+logo = PhotoImage(file="assets/logo.png")
 
 canvas = tk.Canvas(root, width=logo.width(), height=logo.height(), bg="#1f286d", highlightthickness=0)
 canvas.pack(expand=True)

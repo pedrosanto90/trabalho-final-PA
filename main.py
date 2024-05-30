@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from database import *
+from src.database.database import *
 
 try:
     connect()
