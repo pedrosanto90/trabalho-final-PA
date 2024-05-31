@@ -72,18 +72,9 @@ def create_tables():
     FOREIGN KEY(service_client_id) REFERENCES clients(client_id), \
     FOREIGN KEY(service_state) REFERENCES states(state_id))')
 
-    mycursor.execute('CREATE TABLE payment_states (payment_state_id INT AUTO_INCREMENT PRIMARY KEY, \
-    payment_state_description VARCHAR(50))')
-
-    mycursor.execute('CREATE TABLE payments_type (payment_type_id INT AUTO_INCREMENT PRIMARY KEY, \
-    payment_type_description VARCHAR(50))')
-
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
-    payment_service_id INT, payment_date DATE, payment_value INT, payment_state INT, \
-    payment_type INT NOT NULL, \
-    FOREIGN KEY(payment_type) REFERENCES payments_type(payment_type_id), \
-    FOREIGN KEY(payment_service_id) REFERENCES services(services_id), \
-    FOREIGN KEY(payment_state) REFERENCES payment_states(payment_state_id))')
+    payment_service_id INT, payment_date DATE, payment_value INT, payment_state VARCHAR(50), \
+    payment_type INT NOT NULL)')
 
     mycursor.execute('CREATE TABLE reports (report_id INT AUTO_INCREMENT PRIMARY KEY, \
     report_service_id INT NOT NULL, \
