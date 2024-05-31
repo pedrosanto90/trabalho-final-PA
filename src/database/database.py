@@ -102,4 +102,5 @@ def create_tables():
     user_name VARCHAR(50), \
     user_fullname VARCHAR(256), \
     user_image VARCHAR(256), \
-    user_password VARCHAR(64))')
+    user_password VARCHAR(64), \
+    user_role VARCHAR(50))')
