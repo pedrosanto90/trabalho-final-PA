@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from takePic import takePic
+from src.takePic import takePic
 
-def login():
+def login_ui():
     root = tk.Tk()
     root.title("Norauto - Login")
     root.geometry("600x400")
@@ -18,3 +18,4 @@ def login():
     button_window = canvas.create_window(logo.width()//2, (logo.height()//2)+150, anchor="center", window=button_login)
 
     root.mainloop()
+
