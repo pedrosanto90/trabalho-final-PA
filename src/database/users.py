@@ -76,5 +76,3 @@ def login(user_name, user_password):
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-# Example usage
-login('pedroesanto', 'Pedro915624607')
