@@ -7,7 +7,7 @@ import bcrypt
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")
 
-def create_user(user_name, user_fullname, user_password):
+def create_user(user_name, user_fullname, user_password, user_role):
     try:
         connection = mysql.connector.connect(
             host='localhost',
