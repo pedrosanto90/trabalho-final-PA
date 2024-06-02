@@ -73,8 +73,11 @@ def create_tables():
     FOREIGN KEY(service_state) REFERENCES states(state_id))')
 
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
-    payment_service_id INT, payment_date DATE, payment_value INT, payment_state VARCHAR(50), \
-    payment_type VARCHAR(50)')
+    payment_service_id INT, \
+    payment_date DATE, \
+    payment_value INT, \
+    payment_state VARCHAR(50), \
+    payment_type VARCHAR(50))')
 
     mycursor.execute('CREATE TABLE reports (report_id INT AUTO_INCREMENT PRIMARY KEY, \
     report_service_id INT NOT NULL, \

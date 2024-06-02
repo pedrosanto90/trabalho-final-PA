@@ -20,12 +20,12 @@ def create_user(user_name, user_fullname, user_password, user_role):
             cursor = connection.cursor()
 
             # Consulta SQL para inserir um novo cliente
-            insert_query = 'INSERT INTO users (user_name, user_fullname, user_password) \
-                VALUES (%s, %s, %s)'
+            insert_query = 'INSERT INTO users (user_name, user_fullname, user_password, user_role) \
+                VALUES (%s, %s, %s, %s)'
             
             # TODO: adicionar bcrypt para guardar as passwords
             hashed_password = bcrypt.hashpw(user_password.encode('utf-8'), bcrypt.gensalt())
-            record = (user_name, user_fullname, hashed_password)
+            record = (user_name, user_fullname, hashed_password, user_role)
 
             cursor.execute(insert_query, record)
             connection.commit()
