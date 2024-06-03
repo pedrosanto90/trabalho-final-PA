@@ -1,6 +1,6 @@
 import cv2
 
-def takePic():
+def takePic(nome):
     cam_port = 1
     cam = cv2.VideoCapture(cam_port) 
 
@@ -17,7 +17,7 @@ def takePic():
         # Se a tecla 's' for pressionada (código ASCII 115)
         if key == 115:
             # Salva o frame como imagem
-            cv2.imwrite("test.png", frame)
+            cv2.imwrite(f"images/{nome}.png", frame)
             print("Foto tirada!")
             break  # Sai do loop
 

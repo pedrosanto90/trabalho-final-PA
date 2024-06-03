@@ -104,6 +104,5 @@ def create_tables():
     mycursor.execute('CREATE TABLE users (user_id INT AUTO_INCREMENT PRIMARY KEY, \
     user_name VARCHAR(50), \
     user_fullname VARCHAR(256), \
-    user_image VARCHAR(256), \
     user_password VARCHAR(64), \
     user_role VARCHAR(50))')

@@ -31,7 +31,7 @@ def add_user():
             tk.Button(pedir_password, text="Guardar", command=guardar).grid(row=4, columnspan=2)
             pedir_password.mainloop()
         else:
-            takePic()
+            takePic(name)
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
     adicionar_cliente.mainloop()
 
