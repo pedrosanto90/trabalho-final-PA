@@ -49,4 +49,4 @@ def main_window():
 
     root.mainloop()
 
-main_window()
+# main_window()
