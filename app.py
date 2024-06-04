@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage
 from src.takePic import takePic
 from src.database.database import *
+from src.database.users import create_user
 
 
 def takePicture():
@@ -11,6 +12,7 @@ try:
 except:
     create_db()
     create_tables()
+    create_user("admin", "Admin", "admin", "Admin")
 
 root = tk.Tk()
 root.title("Norauto - Login")
