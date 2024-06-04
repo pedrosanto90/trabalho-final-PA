@@ -132,7 +132,7 @@ def list_payments():
             cursor = connection.cursor()
 
             # SQL query to select all payments
-            select_query = """SELECT payment_date, payment_value, payment_state, payment_type FROM payments"""
+            select_query = """SELECT DATE_FORMAT(payment_date, "%d/%m/%Y"), payment_value, payment_state, payment_type FROM payments"""
 
             # Execute the query
             cursor.execute(select_query)

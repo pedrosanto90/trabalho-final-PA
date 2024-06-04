@@ -38,6 +38,7 @@ def add_user():
                             create_user(name, fullName, password, role)
                             messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
                             pedir_password.destroy()
+                            adicionar_cliente.destroy()
                         else:
                             messagebox.showerror("Erro", "Palavras-passe não correspondem.")
                     else:
@@ -47,6 +48,7 @@ def add_user():
             else:
                 takePic(name)
                 messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
+                adicionar_cliente.destroy()
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
@@ -63,6 +65,7 @@ def remove_user():
         if name:
             delete_user(name)
             messagebox.showinfo("Sucesso", "Utilizador removido com sucesso!")
+            remover_cliente.destroy()
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
