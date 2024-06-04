@@ -25,7 +25,7 @@ menu_bar.add_cascade(label="Utilizadores", menu=menu_utilizadores)
 menu_utilizadores.add_command(label="Adicionar", command=add_user)
 # nao abre a pagina de login
 menu_utilizadores.add_command(label="Login", command=login_ui)
-menu_utilizadores.add_command(label="Remover", command=delete_user)
+menu_utilizadores.add_command(label="Remover", command=remove_user)
 
 menu_clientes = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
