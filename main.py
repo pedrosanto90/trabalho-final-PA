@@ -3,6 +3,7 @@ from tkinter import PhotoImage
 from src.database.database import *
 from users import *
 from login_ui import login_ui
+from payments import *
 
 try:
     connect()
@@ -24,7 +25,7 @@ menu_bar.add_cascade(label="Utilizadores", menu=menu_utilizadores)
 menu_utilizadores.add_command(label="Adicionar", command=add_user)
 # nao abre a pagina de login
 menu_utilizadores.add_command(label="Login", command=login_ui)
-menu_utilizadores.add_command(label="Remover", command=remove_user)
+menu_utilizadores.add_command(label="Remover", command=delete_user)
 
 menu_clientes = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
@@ -38,8 +39,8 @@ menu_manutencoes.add_command(label="Remover")
 
 menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
-menu_pagamentos.add_command(label="Adicionar")
-menu_pagamentos.add_command(label="Remover")
+menu_pagamentos.add_command(label="Adicionar", command=add_payment)
+menu_pagamentos.add_command(label="Remover", command=delete_payment)
 
 menu_bar.add_command(label="Sair", command=sair)
 
