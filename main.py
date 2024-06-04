@@ -4,13 +4,6 @@ from src.database.database import *
 from users import *
 from payments import *
 
-<<<<<<< HEAD
-=======
-def sair():
-    root = tk.Tk()
-    root.quit()
-
->>>>>>> pedro
 def main_window():
     def sair():
         root.quit()

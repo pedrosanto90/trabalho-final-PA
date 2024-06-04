@@ -152,7 +152,6 @@ def update_password(user_name, user_password):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
-<<<<<<< HEAD
 
 def list_users():
     try:
@@ -186,5 +185,3 @@ def list_users():
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
-=======
->>>>>>> pedro

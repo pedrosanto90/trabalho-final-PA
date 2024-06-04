@@ -2,12 +2,8 @@ import tkinter as tk
 from tkinter import PhotoImage
 from src.takePic import takePic
 from src.database.database import *
-<<<<<<< HEAD
 from src.database.users import create_user
-
-=======
 from user_admin import *
->>>>>>> pedro
 
 def takePicture():
     takePic('pedro')
