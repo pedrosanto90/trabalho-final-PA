@@ -35,13 +35,14 @@ def add_user():
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
     adicionar_cliente.mainloop()
 
-def delete_user():
+def remove_user():
     remover_cliente = tk.Toplevel()
     remover_cliente.title("Criar cliente")
     tk.Label(remover_cliente, text="Nome de utilizador:").grid(row=0, column=0)
     eName = tk.Entry(remover_cliente)
     eName.grid(row=0, column=1)
     def remover():
-        pass
+        name = eName.get()
+        delete_user(name)
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
     remover_cliente.mainloop()

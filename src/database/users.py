@@ -40,6 +40,45 @@ def create_user(user_name, user_fullname, user_password, user_role):
             print("Conexão ao MySQL encerrada.")
 
 
+def delete_user(user_name):
+    try:
+        # Conexão com o banco de dados
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # Consulta SQL para excluir um utilizador
+            delete_query = """
+            DELETE FROM users
+            WHERE user_name = %s
+            """
+            record = (user_name,)
+
+            # Executar a consulta
+            cursor.execute(delete_query, record)
+            connection.commit()
+
+            image_path = os.path.join("images/", f"{user_name}.jpg")
+            if os.path.isfile(image_path):
+                os.remove(image_path)
+
+            print("Utilizador eliminado com sucesso.")
+
+    except Error as erro:
+        print("Erro ao conectar ao MySQL:", erro)
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
+
+
 def login(user_name, user_password):
     try:
         connection = mysql.connector.connect(

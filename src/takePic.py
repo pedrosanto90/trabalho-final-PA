@@ -17,7 +17,7 @@ def takePic(nome):
         # Se a tecla 's' for pressionada (código ASCII 115)
         if key == 115:
             # Salva o frame como imagem
-            cv2.imwrite(f"images/{nome}.png", frame)
+            cv2.imwrite(f"images/{nome}.jpg", frame)
             print("Foto tirada!")
             break  # Sai do loop
 
