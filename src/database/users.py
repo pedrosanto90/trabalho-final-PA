@@ -95,13 +95,13 @@ def login(user_name, user_password):
             result = cursor.fetchone()
 
             if result is not None:
-                stored_password = result[0]
-                if bcrypt.checkpw(user_password.encode('utf-8'), stored_password.encode('utf-8')):
+                stored_password = result
+                if bcrypt.checkpw(user_password.encode('utf-8'), stored_password):
                     print("Login bem-sucedido.")
-                    return "Login bem-sucedido."
+                    return True
                 else:
                     print("Username ou password incorretos")
-                    return "Username ou password incorretos"
+                    return False
             else:
                 print("Utilizador não encontrado.")
                 return "Utilizador não encontrado."
@@ -152,6 +152,7 @@ def update_password(user_name, user_password):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+<<<<<<< HEAD
 
 def list_users():
     try:
@@ -185,3 +186,5 @@ def list_users():
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+=======
+>>>>>>> pedro

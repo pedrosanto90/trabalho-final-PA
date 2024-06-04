@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from main import main_window
+# from main import main_window
 # from PIL import ImageGrab
 
 # Define path to images
@@ -70,7 +70,7 @@ while True:
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
             markAttendance(name)
-            main_window()
+            # main_window()
 
 
 
