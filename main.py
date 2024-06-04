@@ -33,10 +33,17 @@ def main_window():
     menu_manutencoes.add_command(label="Adicionar")
     menu_manutencoes.add_command(label="Remover")
 
+<<<<<<< HEAD
     menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
     menu_pagamentos.add_command(label="Adicionar", command=add_payment)
     menu_pagamentos.add_command(label="Remover", command=delete_payment)
+=======
+menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
+menu_pagamentos.add_command(label="Adicionar", command=add_payment)
+menu_pagamentos.add_command(label="Lista de Pagamentos", command=list_all_payments)
+>>>>>>> c1b34664bea89cb320292e23d2ca0cdedf503523
 
     menu_bar.add_command(label="Sair", command=sair)
 
