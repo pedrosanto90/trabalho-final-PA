@@ -60,8 +60,8 @@ def list_all_payments():
         listar_pagamentos.destroy()
         return
 
-    for i, payment in enumerate(payments, start=1):
-        date, value, state, typePayment = payment
+    for i, element in enumerate(payments, start=1):
+        date, value, state, typePayment = element
         tk.Label(listar_pagamentos, text=date).grid(row=i, column=0)
         tk.Label(listar_pagamentos, text=value).grid(row=i, column=1)
         tk.Label(listar_pagamentos, text=state).grid(row=i, column=2)
