@@ -79,3 +79,37 @@ def update_client(client_address, client_mobile, client_email, client_id):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+
+def delete_client(client_id):
+    try:
+        # Conexão com o banco de dados
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # Consulta SQL para deletar um cliente
+            delete_query = """
+                DELETE FROM clients
+                WHERE client_id = %s
+                """
+            record = (client_id,)
+
+            # Executar a consulta
+            cursor.execute(delete_query, record)
+            connection.commit()
+            print("Cliente excluído com sucesso.")
+
+    except Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
