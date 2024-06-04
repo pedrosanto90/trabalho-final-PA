@@ -21,9 +21,6 @@ def takePic(nome):
             print("Foto tirada!")
             break  # Sai do loop
 
-        # Se a tecla 'q' for pressionada (código ASCII 113)
-        if key == 113:
-            break  # Sai do loop
 
     cv2.destroyAllWindows()
 
