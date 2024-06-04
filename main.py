@@ -3,6 +3,7 @@ from tkinter import PhotoImage
 from src.database.database import *
 from users import *
 from payments import *
+from services import *
 
 def main_window():
     def sair():
@@ -27,20 +28,16 @@ def main_window():
     menu_clientes.add_command(label="Adicionar")
     menu_clientes.add_command(label="Remover")
 
-    menu_manutencoes = tk.Menu(menu_bar, tearoff=0)
-    menu_bar.add_cascade(label="Manutenções", menu=menu_manutencoes)
-    menu_manutencoes.add_command(label="Adicionar")
-    menu_manutencoes.add_command(label="Remover")
-
     menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
     menu_pagamentos.add_command(label="Adicionar", command=add_payment)
     menu_pagamentos.add_command(label="Lista de Pagamentos", command=list_all_payments)
 
-    menu_veiculos = tk.Menu(menu_bar, tearoff=0)
-    menu_bar.add_cascade(label="Veículos", menu=menu_veiculos)
-    menu_veiculos.add_command(label="Adicionar")
-    menu_veiculos.add_command(label="Remover")
+    menu_services = tk.Menu(menu_bar, tearoff=0)
+    menu_bar.add_cascade(label="Serviços", menu=menu_services)
+    menu_services.add_command(label="Adicionar", command=create_service_page)
+    menu_services.add_command(label="Atualizar", command=update_service_page)
+    menu_services.add_command(label="Remover", command=delete_service_page)
 
     menu_bar.add_command(label="Sair", command=sair)
 

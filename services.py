@@ -1,11 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
-#from database.services import create_service, update_service, delete_service
+from src.database.services import *
 
 def create_service_page():
     add_window = tk.Toplevel()
     add_window.title("Adicionar Serviço")
-    add_window.geometry("400x400")
 
     labels = ["Vehicle ID", "Type ID", "State ID", "Description", "Start Date", "End Date", "State", "Price", "Price Material"]
     entries = []
@@ -27,7 +26,6 @@ def create_service_page():
 def update_service_page():
     update_window = tk.Toplevel()
     update_window.title("Atualizar Serviço")
-    update_window.geometry("400x450")
 
     labels = ["Service ID", "Vehicle ID", "Type ID", "State ID", "Description", "Start Date", "End Date", "State", "Price", "Price Material"]
     entries = []
@@ -49,7 +47,6 @@ def update_service_page():
 def delete_service_page():
     delete_window = tk.Toplevel()
     delete_window.title("Apagar Serviço")
-    delete_window.geometry("300x200")
 
     tk.Label(delete_window, text="Service ID").grid(row=0, column=0)
     service_id_entry = tk.Entry(delete_window)
