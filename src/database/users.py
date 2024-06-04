@@ -115,3 +115,40 @@ def login(user_name, user_password):
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
+def update_password(user_name, user_password):
+    try:
+        # Connect to the database
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # SQL query to update a payment
+            update_query = """
+            UPDATE users
+            SET
+                user_password = %s
+            WHERE
+                user_name = %s
+            """
+            record = (user_password, user_name)
+
+            # Execute the query
+            cursor.execute(update_query, record)
+            connection.commit()
+            print("Utilizador atualizado com sucesso.")
+            return cursor.rowcount
+
+    except Error as erro:
+        print(f"Erro ao conectar ao MySQL: {erro}")
+        return None
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")

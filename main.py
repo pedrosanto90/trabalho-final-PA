@@ -36,7 +36,7 @@ def main_window():
     menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
     menu_pagamentos.add_command(label="Adicionar", command=add_payment)
-    menu_pagamentos.add_command(label="Remover", command=delete_payment)
+    menu_pagamentos.add_command(label="Lista de Pagamentos", command=list_all_payments)
 
     menu_bar.add_command(label="Sair", command=sair)
 
