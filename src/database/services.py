@@ -47,4 +47,84 @@ def create_service(service_vehicle_id, service_type_id, service_state_id, servic
             connection.close()
             print("conexão ao mysql encerrada.")
 
-create_service(1, 1, 1, 'teste', '2022-01-01', '2022-01-01', 1, 1, 1)
+def update_service(service_id, service_vehicle_id, service_type_id, service_state_id, service_description, \
+                   service_start, service_end, service_state, service_price, service_price_material):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # Obter a data e hora atuais para atualização
+            service_updated = datetime.now().strftime('%Y-%m-%d')
+
+            # Consulta SQL para atualizar um serviço
+            update_query = """
+                UPDATE services
+                SET service_vehicle_id = %s,
+                    service_type_id = %s,
+                    service_state_id = %s,
+                    service_description = %s,
+                    service_start = %s,
+                    service_end = %s,
+                    service_state = %s,
+                    service_price = %s,
+                    service_price_material = %s,
+                    service_updated = %s
+                WHERE service_id = %s
+                """
+            record = (service_vehicle_id, service_type_id, service_state_id, service_description, \
+                      service_start, service_end, service_state, service_price, service_price_material, \
+                      service_updated, service_id)
+
+            # Executar a consulta
+            cursor.execute(update_query, record)
+            connection.commit()
+            print("Serviço atualizado com sucesso.")
+
+    except Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
+
+def delete_service(service_id):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # Consulta SQL para excluir um serviço
+            delete_query = """
+                DELETE FROM services
+                WHERE service_id = %s
+                """
+            record = (service_id,)
+
+            # Executar a consulta
+            cursor.execute(delete_query, record)
+            connection.commit()
+            print("Serviço excluído com sucesso.")
+
+    except Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
