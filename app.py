@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from src.takePic import takePic
 from src.database.database import *
 from src.database.users import create_user
 from user_admin import *
+from src.faceRec import *
 
 def takePicture():
     takePic('pedro')
@@ -25,7 +25,7 @@ canvas = tk.Canvas(root, width=logo.width(), height=logo.height(), bg="#1f286d",
 canvas.pack(expand=True)
 canvas.create_image(0, 0, anchor="nw", image=logo)
 
-button_login = tk.Button(root, text="Login", command=takePicture)
+button_login = tk.Button(root, text="Login", command=faceRec)
 button_admin_login = tk.Button(root, text="Admin Login", command=admin)
 
 button_window = canvas.create_window(logo.width()//2, (logo.height()//2)+150, anchor="center", window=button_login)
