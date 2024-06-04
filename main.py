@@ -4,7 +4,6 @@ from src.database.database import *
 from users import *
 from payments import *
 
-
 def sair():
     root = tk.Tk()
     root.quit()
