@@ -106,3 +106,5 @@ def create_tables():
     user_fullname VARCHAR(256), \
     user_password VARCHAR(64), \
     user_role VARCHAR(50))')
+
+    mycursor.execute('INSERT INTO users (user_name, user_fullname, user_password) VALUES ("admin", "Administrador", "admin")')

@@ -60,12 +60,17 @@ def remove_user():
     tk.Label(remover_cliente, text="Nome de utilizador:").grid(row=0, column=0)
     eName = tk.Entry(remover_cliente)
     eName.grid(row=0, column=1)
+    user_names = list_users()
     def remover():
         name = eName.get()
         if name:
-            delete_user(name)
-            messagebox.showinfo("Sucesso", "Utilizador removido com sucesso!")
-            remover_cliente.destroy()
+            for user_name in user_names:
+                if name in user_name:
+                    delete_user(name)
+                    messagebox.showinfo("Sucesso", "Utilizador removido com sucesso!")
+                    remover_cliente.destroy()
+                else:
+                    messagebox.showerror("Erro", "Utilizador não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
@@ -77,32 +82,37 @@ def change_password():
     tk.Label(mudar_password, text="Nome de utilizador:").grid(row=0, column=0)
     eName = tk.Entry(mudar_password)
     eName.grid(row=0, column=1)
+    user_names = list_users()
     def mudar():
         name = eName.get()
         if name:
-            pedir_password = tk.Toplevel()
-            pedir_password.title("Introduza palavra-passe")
-            tk.Label(pedir_password, text="Palavra-passe:").grid(row=0, column=0)
-            tk.Label(pedir_password, text="Repita palavra-passe:").grid(row=1, column=0)
-            ePassword = tk.Entry(pedir_password, show="*")
-            eRePassword = tk.Entry(pedir_password, show="*")
-            ePassword.grid(row=0, column=1)
-            eRePassword.grid(row=1, column=1)
-            def guardar():
-                password = ePassword.get()
-                rePassword = eRePassword.get()
-                if password and rePassword:
-                    if password == rePassword:
-                        update_password(name, password)
-                        messagebox.showinfo("Sucesso", "Palavra-passe alterada com sucesso!")
-                        pedir_password.destroy()
-                        mudar_password.destroy()
-                    else:
-                        messagebox.showerror("Erro", "Palavras-passe não correspondem.")
+            for user_name in user_names:
+                if name in user_name:
+                    pedir_password = tk.Toplevel()
+                    pedir_password.title("Introduza palavra-passe")
+                    tk.Label(pedir_password, text="Palavra-passe:").grid(row=0, column=0)
+                    tk.Label(pedir_password, text="Repita palavra-passe:").grid(row=1, column=0)
+                    ePassword = tk.Entry(pedir_password, show="*")
+                    eRePassword = tk.Entry(pedir_password, show="*")
+                    ePassword.grid(row=0, column=1)
+                    eRePassword.grid(row=1, column=1)
+                    def guardar():
+                        password = ePassword.get()
+                        rePassword = eRePassword.get()
+                        if password and rePassword:
+                            if password == rePassword:
+                                update_password(name, password)
+                                messagebox.showinfo("Sucesso", "Palavra-passe alterada com sucesso!")
+                                pedir_password.destroy()
+                                mudar_password.destroy()
+                            else:
+                                messagebox.showerror("Erro", "Palavras-passe não correspondem.")
+                        else:
+                            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+                    tk.Button(pedir_password, text="Guardar", command=guardar).grid(row=4, columnspan=2)
+                    pedir_password.mainloop()
                 else:
-                    messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-            tk.Button(pedir_password, text="Guardar", command=guardar).grid(row=4, columnspan=2)
-            pedir_password.mainloop()
+                    messagebox.showerror("Erro", "Utilizador não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(mudar_password, text="Mudar", command=mudar).grid(row=3, columnspan=2)
