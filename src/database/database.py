@@ -75,7 +75,7 @@ def create_tables():
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
     payment_service_id INT, \
     payment_date DATE, \
-    payment_value INT, \
+    payment_value FLOAT, \
     payment_state VARCHAR(50), \
     payment_type VARCHAR(50))')
 
