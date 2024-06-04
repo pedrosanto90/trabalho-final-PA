@@ -20,6 +20,7 @@ def main_window():
     menu_utilizadores.add_command(label="Adicionar", command=add_user)
     menu_utilizadores.add_command(label="Remover", command=remove_user)
     menu_utilizadores.add_command(label="Mudar palavra-passe", command=change_password)
+    menu_utilizadores.add_command(label="Atualizar fotografia", command=update_photo)
 
     menu_clientes = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Clientes", menu=menu_clientes)

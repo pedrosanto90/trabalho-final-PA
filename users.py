@@ -117,3 +117,25 @@ def change_password():
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(mudar_password, text="Mudar", command=mudar).grid(row=3, columnspan=2)
     mudar_password.mainloop()
+
+def update_photo():
+    atualizar_foto = tk.Toplevel()
+    atualizar_foto.title("Atualizar fotografia")
+    tk.Label(atualizar_foto, text="Nome de utilizador:").grid(row=0, column=0)
+    eName = tk.Entry(atualizar_foto)
+    eName.grid(row=0, column=1)
+    user_names = list_users()
+    def atualizar():
+        name = eName.get()
+        if name:
+            for user_name in user_names:
+                if name in user_name:
+                    takePic(name)
+                    messagebox.showinfo("Sucesso", "Fotografia atualizada com sucesso!")
+                    atualizar_foto.destroy()
+                else:
+                    messagebox.showerror("Erro", "Utilizador não existe.")
+        else:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+        tk.Button(atualizar_foto, text="Atualizar", command=atualizar).grid(row=3, columnspan=2)
+        atualizar_foto.mainloop()
