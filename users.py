@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from src.database.users import *
 from src.takePic import takePic
+from tkinter import messagebox
 
 def add_user():
     adicionar_cliente = tk.Toplevel()
@@ -19,19 +20,35 @@ def add_user():
         name = eName.get()
         fullName = eFullName.get()
         role = eRole.get()
-        if role == "Admin":
-            pedir_password = tk.Toplevel()
-            pedir_password.title("Introduza palavra-passe")
-            tk.Label(pedir_password, text="Palavra-passe:").grid(row=0, column=0)
-            ePassword = tk.Entry(pedir_password)
-            ePassword.grid(row=0, column=1)
-            def guardar():
-                password = ePassword.get()
-                create_user(name, fullName, password, role)
-            tk.Button(pedir_password, text="Guardar", command=guardar).grid(row=4, columnspan=2)
-            pedir_password.mainloop()
+        if name and fullName and role:
+            if role == "Admin":
+                pedir_password = tk.Toplevel()
+                pedir_password.title("Introduza palavra-passe")
+                tk.Label(pedir_password, text="Palavra-passe:").grid(row=0, column=0)
+                tk.Label(pedir_password, text="Repita palavra-passe:").grid(row=1, column=0)
+                ePassword = tk.Entry(pedir_password, show="*")
+                eRePassword = tk.Entry(pedir_password, show="*")
+                ePassword.grid(row=0, column=1)
+                eRePassword.grid(row=1, column=1)
+                def guardar():
+                    password = ePassword.get()
+                    rePassword = eRePassword.get()
+                    if password and rePassword:
+                        if password == rePassword:
+                            create_user(name, fullName, password, role)
+                            messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
+                            pedir_password.destroy()
+                        else:
+                            messagebox.showerror("Erro", "Palavras-passe não correspondem.")
+                    else:
+                        messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+                tk.Button(pedir_password, text="Guardar", command=guardar).grid(row=4, columnspan=2)
+                pedir_password.mainloop()
+            else:
+                takePic(name)
+                messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
         else:
-            takePic(name)
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
     adicionar_cliente.mainloop()
 
@@ -43,6 +60,10 @@ def remove_user():
     eName.grid(row=0, column=1)
     def remover():
         name = eName.get()
-        delete_user(name)
+        if name:
+            delete_user(name)
+            messagebox.showinfo("Sucesso", "Utilizador removido com sucesso!")
+        else:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
     remover_cliente.mainloop()
