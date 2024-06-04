@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkcalendar import DateEntry  # Importa o widget DateEntry do tkcalendar
 from src.database.services import *
 
 def create_service_page():
@@ -11,12 +12,16 @@ def create_service_page():
 
     for i, label in enumerate(labels):
         tk.Label(add_window, text=label).grid(row=i, column=0)
-        entry = tk.Entry(add_window)
+        if label in ["Start Date", "End Date"]:
+            # Se a etiqueta for "Start Date" ou "End Date", cria um DateEntry widget
+            entry = DateEntry(add_window, date_pattern="dd/mm/yyyy")
+        else:
+            entry = tk.Entry(add_window)
         entry.grid(row=i, column=1)
         entries.append(entry)
 
     def on_submit():
-        values = [entry.get() for entry in entries]
+        values = [entry.get_date() if isinstance(entry, DateEntry) else entry.get() for entry in entries]
         create_service(*values)
         messagebox.showinfo("Sucesso", "Serviço criado com sucesso!")
         add_window.destroy()
@@ -32,12 +37,15 @@ def update_service_page():
 
     for i, label in enumerate(labels):
         tk.Label(update_window, text=label).grid(row=i, column=0)
-        entry = tk.Entry(update_window)
+        if label in ["Start Date", "End Date"]:
+            entry = DateEntry(update_window, date_pattern="dd/mm/yyyy")
+        else:
+            entry = tk.Entry(update_window)
         entry.grid(row=i, column=1)
         entries.append(entry)
 
     def on_submit():
-        values = [entry.get() for entry in entries]
+        values = [entry.get_date() if isinstance(entry, DateEntry) else entry.get() for entry in entries]
         update_service(*values)
         messagebox.showinfo("Sucesso", "Serviço atualizado com sucesso!")
         update_window.destroy()

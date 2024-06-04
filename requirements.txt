@@ -16,3 +16,4 @@ pillow==10.3.0
 python-dotenv==1.0.1
 Werkzeug==3.0.3
 dlib==19.24.2
+tkcalendar==1.6.1
