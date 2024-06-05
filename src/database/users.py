@@ -1,9 +1,16 @@
 import mysql.connector
+from dotenv import load_dotenv
+import os
+from mysql.connector import Error
 import bcrypt
+<<<<<<< HEAD
 import os
 from mysql.connector import Error
 from dotenv import load_dotenv
 from src.ui.main import *
+=======
+from main import *
+>>>>>>> parent of f31e177 (movidos ficheiros ui para dentro do diretorio src/ui)
 
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")

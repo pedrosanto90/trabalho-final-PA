@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from src.ui.main import main_window
+from main import main_window
 
 # Define path to images
 path = 'images'
