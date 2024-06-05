@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from src.database.clients import *
 from tkinter import messagebox
+import re
 
 def add_client():
     adicionar_cliente = tk.Toplevel()
@@ -13,11 +14,10 @@ def add_client():
     tk.Label(adicionar_cliente, text="Email:").grid(row=4, column=0)
     eName = tk.Entry(adicionar_cliente)
     eAddress = tk.Entry(adicionar_cliente)
+
     def validar9char(P):
-        if len(P) > 9:
-            return False
-        else:
-            return True
+        return len(P) <= 9
+
     valNif = (adicionar_cliente.register(validar9char), "%P")
     eNif = tk.Entry(adicionar_cliente, validate="key", validatecommand=valNif)
     valMobile = (adicionar_cliente.register(validar9char), "%P")
@@ -28,6 +28,11 @@ def add_client():
     eNif.grid(row=2, column=1)
     eMobile.grid(row=3, column=1)
     eMail.grid(row=4, column=1)
+
+    def validar_email(email):
+        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        return re.match(pattern, email) is not None
+
     def adicionar():
         name = eName.get()
         address = eAddress.get()
@@ -35,11 +40,21 @@ def add_client():
         mobile = eMobile.get()
         mail = eMail.get()
         if name and address and nif and mobile and mail:
+            if not validar_email(mail):
+                messagebox.showerror("Erro", "Email inválido.")
+                return
+            if not (nif.isdigit() and len(nif) == 9):
+                messagebox.showerror("Erro", "NIF deve conter exatamente 9 dígitos.")
+                return
+            if not (mobile.isdigit() and len(mobile) == 9):
+                messagebox.showerror("Erro", "Número de telefone deve conter exatamente 9 dígitos.")
+                return
             create_client(name, address, nif, mobile, mail)
             messagebox.showinfo("Sucesso", "Cliente criado com sucesso!")
             adicionar_cliente.destroy()
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=5, columnspan=2)
     adicionar_cliente.mainloop()
 
@@ -49,24 +64,21 @@ def remove_client():
     tk.Label(remover_cliente, text="ID do cliente:").grid(row=0, column=0)
     eID = tk.Entry(remover_cliente)
     eID.grid(row=0, column=1)
-    clients_ID = list_clients()
 
     def remover():
         id = eID.get()
         if id:
-            for client in clients_ID:
-                if id in client:
-                    delete_client(id)
-                    messagebox.showinfo("Sucesso", "Cliente removido com sucesso!")
-                    remover_cliente.destroy()
-                else:
-                    messagebox.showerror("Erro", "Cliente não existe.")
+            if verify_client(id):
+                delete_client(id)
+                messagebox.showinfo("Sucesso", "Cliente removido com sucesso!")
+                remover_cliente.destroy()
+            else:
+                messagebox.showerror("Erro", "Cliente não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
 
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
     remover_cliente.mainloop()
-
 
 def list_all_clients():
     listar_clients = tk.Toplevel()

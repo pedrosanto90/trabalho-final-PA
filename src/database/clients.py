@@ -150,3 +150,32 @@ def list_clients():
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+
+def verify_client(client_id):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            cursor.execute('SELECT client_id FROM clients WHERE client_id = %s', (client_id,))
+            result = cursor.fetchone()
+
+            if result is not None:
+                return True
+            else:
+                return False
+
+    except Error as err:
+        print(f'Erro ao conectar a base de dados: {err}')
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")

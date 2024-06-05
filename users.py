@@ -59,10 +59,10 @@ def add_user():
     adicionar_utilizador.mainloop()
 
 def remove_user():
-    remover_cliente = tk.Toplevel()
-    remover_cliente.title("Remover utilizador")
-    tk.Label(remover_cliente, text="Nome de utilizador:").grid(row=0, column=0)
-    eName = tk.Entry(remover_cliente)
+    remover_utilizador = tk.Toplevel()
+    remover_utilizador.title("Remover utilizador")
+    tk.Label(remover_utilizador, text="Nome de utilizador:").grid(row=0, column=0)
+    eName = tk.Entry(remover_utilizador)
     eName.grid(row=0, column=1)
     def remover():
         name = eName.get()
@@ -70,13 +70,13 @@ def remove_user():
             if verify_user(name):
                 delete_user(name)
                 messagebox.showinfo("Sucesso", "Utilizador removido com sucesso!")
-                remover_cliente.destroy()
+                remover_utilizador.destroy()
             else:
                 messagebox.showerror("Erro", "Utilizador não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-    tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
-    remover_cliente.mainloop()
+    tk.Button(remover_utilizador, text="Remover", command=remover).grid(row=3, columnspan=2)
+    remover_utilizador.mainloop()
 
 def change_password():
     mudar_password = tk.Toplevel()
