@@ -19,7 +19,6 @@ def admin():
     ePassword = tk.Entry(admin_login, show="*")
     eUsername.grid(row=0, column=1)
     ePassword.grid(row=1, column=1)
-
     def aLogin():
         username = eUsername.get()
         password = ePassword.get()

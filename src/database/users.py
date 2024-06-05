@@ -153,9 +153,8 @@ def update_password(user_name, user_password):
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-def list_users():
+def verify_user(user_name):
     try:
-        # Connect to the database
         connection = mysql.connector.connect(
             host='localhost',
             database='trabalho_final',
@@ -166,20 +165,17 @@ def list_users():
         if connection.is_connected():
             cursor = connection.cursor()
 
-            # SQL query to select all payments
-            select_query = """SELECT user_name FROM users"""
+            cursor.execute('SELECT user_name FROM users WHERE user_name = %s', (user_name,))
+            result = cursor.fetchone()
 
-            # Execute the query
-            cursor.execute(select_query)
+            if result is not None:
+                return True
+            else:
+                return False
 
-            # Fetch all rows
-            user_names = cursor.fetchall()
+    except Error as err:
+        print(f'Erro ao conectar a base de dados: {err}')
 
-            return user_names
-
-    except Error as erro:
-        print(f"Erro ao conectar ao MySQL: {erro}")
-        return None
     finally:
         if connection.is_connected():
             cursor.close()
