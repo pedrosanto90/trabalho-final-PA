@@ -1,5 +1,7 @@
 from src.ui.user_admin import *
 from src.faceRec import *
+import tkinter as tk
+from tkinter import PhotoImage
 
 def takePicture():
     takePic('pedro')
@@ -24,8 +26,7 @@ canvas.create_image(0, 0, anchor="nw", image=logo)
 button_login = tk.Button(root, text="Login", command=faceRec)
 button_admin_login = tk.Button(root, text="Admin Login", command=admin)
 
-button_window = canvas.create_window(logo.width()//2, (logo.height()//2)+150, anchor="center", window=button_login)
-button_window_admin_login = canvas.create_window(logo.width()//2, (logo.height()//2) + 200, anchor="center", window=button_admin_login)
+button_window = canvas.create_window(logo.width()//2, (logo.height()//2)+125, anchor="center", window=button_login)
+button_window_admin_login = canvas.create_window(logo.width()//2, (logo.height()//2) + 160, anchor="center", window=button_admin_login)
 
 root.mainloop()
-

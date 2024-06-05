@@ -60,7 +60,7 @@ def faceRec():
     print('Encoding Complete')
 
     # Start webcam
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():
         raise RuntimeError("Error: Could not open webcam.")
