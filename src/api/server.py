@@ -39,9 +39,6 @@ def get_clients():
         if connection.is_connected():
             cursor = connection.cursor(dictionary=True)
 
-            # TODO: alterar query para mostrar nome do cliente em vez do ID
-            #       nao mostrar ID do vehiculo
-        
             cursor.execute("SELECT * FROM clients")
             clients = cursor.fetchall()
 
