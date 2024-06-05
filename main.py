@@ -1,7 +1,7 @@
-from src.ui.users import *
-from src.ui.payments import *
-from src.ui.services import *
-from src.ui.clients import *
+from users import *
+from payments import *
+from services import *
+from clients import *
 import tkinter as tk
 from tkinter import PhotoImage
 

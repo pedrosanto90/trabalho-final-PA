@@ -1,9 +1,8 @@
 import mysql.connector
 import bcrypt
-import os
-from mysql.connector import Error
+from main import *
 from dotenv import load_dotenv
-from src.ui.main import *
+import os
 
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")

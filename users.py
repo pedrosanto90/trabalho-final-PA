@@ -1,8 +1,8 @@
-import tkinter as tk
-from tkinter import ttk
 from src.database.users import *
 from src.takePic import takePic
 from tkinter import messagebox
+import tkinter as tk
+from tkinter import ttk
 
 def add_user():
     adicionar_utilizador = tk.Toplevel()
@@ -137,5 +137,5 @@ def update_photo():
                     messagebox.showerror("Erro", "Utilizador não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-        tk.Button(atualizar_foto, text="Atualizar", command=atualizar).grid(row=3, columnspan=2)
-        atualizar_foto.mainloop()
+    tk.Button(atualizar_foto, text="Atualizar", command=atualizar).grid(row=1, columnspan=2)
+    atualizar_foto.mainloop()
