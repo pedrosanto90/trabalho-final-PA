@@ -25,9 +25,9 @@ def admin():
         if username and password:
             if login(username, password):
                 messagebox.showinfo("Sucesso", "Login efetuado com sucesso!")
-                main_window()
                 admin_login.destroy()
                 root.destroy()
+                main_window()
             else:
                 messagebox.showerror("Erro", "Nome de utilizador ou palavra-passe incorretos.")
         else:
