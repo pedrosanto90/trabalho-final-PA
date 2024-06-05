@@ -97,7 +97,6 @@ def login(user_name, user_password):
 
             if result is not None:
                 stored_password = result[0]
-                print(stored_password)
                 if bcrypt.checkpw(user_password.encode('utf-8'), stored_password.encode('utf-8')):
                     print("Login bem-sucedido.")
                     return True
