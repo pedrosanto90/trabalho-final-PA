@@ -23,7 +23,8 @@ def main_window():
     menu_clientes = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
     menu_clientes.add_command(label="Adicionar", command=add_client)
-    menu_clientes.add_command(label="Remover")
+    menu_clientes.add_command(label="Remover", command=remove_client)
+    menu_clientes.add_command(label="Lista de Clients", command=list_all_clients)
 
     menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)

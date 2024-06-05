@@ -36,9 +36,65 @@ def add_client():
         mail = eMail.get()
         if name and address and nif and mobile and mail:
             create_client(name, address, nif, mobile, mail)
-            messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
+            messagebox.showinfo("Sucesso", "Cliente criado com sucesso!")
             adicionar_cliente.destroy()
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=5, columnspan=2)
     adicionar_cliente.mainloop()
+
+def remove_client():
+    remover_cliente = tk.Toplevel()
+    remover_cliente.title("Remover cliente")
+    tk.Label(remover_cliente, text="ID do cliente:").grid(row=0, column=0)
+    eID = tk.Entry(remover_cliente)
+    eID.grid(row=0, column=1)
+    clients_ID = list_clients()
+
+    def remover():
+        id = eID.get()
+        if id:
+            for client in clients_ID:
+                if id in client:
+                    delete_client(id)
+                    messagebox.showinfo("Sucesso", "Cliente removido com sucesso!")
+                    remover_cliente.destroy()
+                else:
+                    messagebox.showerror("Erro", "Cliente não existe.")
+        else:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+
+    tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
+    remover_cliente.mainloop()
+
+
+def list_all_clients():
+    listar_clients = tk.Toplevel()
+    listar_clients.title("Lista de Clientes")
+
+    tk.Label(listar_clients, text="ID").grid(row=0, column=0)
+    tk.Label(listar_clients, text="Nome").grid(row=0, column=1)
+    tk.Label(listar_clients, text="Morada").grid(row=0, column=2)
+    tk.Label(listar_clients, text="NIF").grid(row=0, column=3)
+    tk.Label(listar_clients, text="Telefone").grid(row=0, column=4)
+    tk.Label(listar_clients, text="Email").grid(row=0, column=5)
+    tk.Label(listar_clients, text="Criado").grid(row=0, column=6)
+
+    clients = list_clients()
+
+    if not clients:
+        messagebox.showinfo("Info", "Não há clientes para mostrar.")
+        listar_clients.destroy()
+        return
+
+    for i, element in enumerate(clients, start=1):
+        id, name, address, nif, phone, email, created = element
+        tk.Label(listar_clients, text=id).grid(row=i, column=0)
+        tk.Label(listar_clients, text=name).grid(row=i, column=1)
+        tk.Label(listar_clients, text=address).grid(row=i, column=2)
+        tk.Label(listar_clients, text=nif).grid(row=i, column=3)
+        tk.Label(listar_clients, text=phone).grid(row=i, column=4)
+        tk.Label(listar_clients, text=email).grid(row=i, column=5)
+        tk.Label(listar_clients, text=created).grid(row=i, column=6)
+
+    listar_clients.mainloop()

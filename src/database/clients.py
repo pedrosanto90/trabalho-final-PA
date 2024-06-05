@@ -5,7 +5,8 @@ from mysql.connector import Error
 from datetime import datetime
 
 load_dotenv()
-PASSWORD= os.getenv("PASSWORD")
+PASSWORD = os.getenv("PASSWORD")
+
 
 def create_client(client_name, client_address, client_nif, client_mobile, client_email):
     try:
@@ -44,6 +45,7 @@ def create_client(client_name, client_address, client_nif, client_mobile, client
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
+
 def update_client(client_address, client_mobile, client_email, client_id):
     try:
         # Conexão com o banco de dados
@@ -69,7 +71,7 @@ def update_client(client_address, client_mobile, client_email, client_id):
             cursor.execute(update_query, record)
             connection.commit()
             print("Cliente atualizado com sucesso.")
-    
+
     except Error as err:
         print("Erro ao conectar ao MySQL:", err)
 
@@ -79,6 +81,7 @@ def update_client(client_address, client_mobile, client_email, client_id):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+
 
 def delete_client(client_id):
     try:
@@ -108,6 +111,40 @@ def delete_client(client_id):
     except Error as err:
         print("Erro ao conectar ao MySQL:", err)
 
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
+
+
+def list_clients():
+    try:
+        # Connect to the database
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            # SQL query to select all payments
+            select_query = """SELECT * FROM clients"""
+
+            # Execute the query
+            cursor.execute(select_query)
+
+            # Fetch all rows
+            clients = cursor.fetchall()
+
+            return clients
+
+    except Error as erro:
+        print(f"Erro ao conectar ao MySQL: {erro}")
+        return None
     finally:
         if connection.is_connected():
             cursor.close()
