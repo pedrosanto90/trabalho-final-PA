@@ -41,17 +41,6 @@ def findEncodings(images):
             print("Warning: No faces found in an image. Skipping.")
     return encodeList
 
-# Function to mark attendance
-def markAttendance(name):
-    with open('Attendance.csv', 'a+') as f:
-        myDataList = f.readlines()
-        nameList = [line.split(',')[0] for line in myDataList]
-        
-        if name not in nameList:
-            now = datetime.now()
-            dtString = now.strftime('%H:%M:%S')
-            f.writelines(f'\n{name},{dtString}')
-
 def faceRec():
     # Get known encodings
     encodeListKnown = findEncodings(images)
@@ -88,7 +77,6 @@ def faceRec():
                     cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
                     cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-                    markAttendance(name)
 
                     # Show the name on the image for a brief period before calling main_window
                     cv2.imshow('Webcam', img)
