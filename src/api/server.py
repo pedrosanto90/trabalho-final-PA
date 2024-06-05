@@ -56,51 +56,5 @@ def get_clients():
     
     return jsonify({"error": "Unable to fetch clients"}), 500
 
-@app.route("/norauto/api/vehicles")
-def vehicles():
-    try:
-        # Conexão com o banco de dados
-        connection = connect_db()
-
-        if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM vehicles")
-            vehicles = cursor.fetchall()
-            return jsonify(vehicles)
-        
-    except mysql.connector.Error as err:
-        return jsonify({"error": str(err)}), 500
-    
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("conexão ao mysql encerrada.")
-    
-    return jsonify({"error": "Unable to fetch vehicles"}), 500
-
-@app.route('/norauto/api/insurances')
-def get_insurances():
-    try:
-        # Conexão com o banco de dados
-        connection = connect_db()
-
-        if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM insurances")
-            insurances = cursor.fetchall()
-            return jsonify(insurances)
-        
-    except mysql.connector.Error as err:
-        return jsonify({"error": str(err)}), 500
-    
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("conexão ao mysql encerrada.")
-    
-    return jsonify({"error": "Unable to fetch insurances"}), 500
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005, debug=True)
