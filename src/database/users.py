@@ -10,7 +10,7 @@ PASSWORD= os.getenv("PASSWORD")
 
 def create_user(user_name, user_fullname, user_password, user_role):
     try:
-        condenection = mysql.connector.connect(
+        connection = mysql.connector.connect(
             host='localhost',
             database='trabalho_final',
             user='root',
