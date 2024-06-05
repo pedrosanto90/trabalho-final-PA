@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from mysql.connector import Error
 import bcrypt
+from main import *
 
 load_dotenv()
 PASSWORD= os.getenv("PASSWORD")
@@ -99,6 +100,7 @@ def login(user_name, user_password):
                 print(stored_password)
                 if bcrypt.checkpw(user_password.encode('utf-8'), stored_password.encode('utf-8')):
                     print("Login bem-sucedido.")
+                    main_window()
                     return True
                 else:
                     print("Username ou password incorretos")
