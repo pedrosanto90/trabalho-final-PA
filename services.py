@@ -67,3 +67,5 @@ def delete_service_page():
         delete_window.destroy()
 
     tk.Button(delete_window, text="Submit", command=on_submit).grid(row=1, column=1)
+
+

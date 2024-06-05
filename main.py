@@ -6,9 +6,6 @@ import tkinter as tk
 from tkinter import PhotoImage
 
 def main_window():
-    def sair():
-        root.quit()
-
     root = tk.Tk()
     root.title("Norauto")
     root.geometry("600x400")
@@ -39,7 +36,7 @@ def main_window():
     menu_services.add_command(label="Atualizar", command=update_service_page)
     menu_services.add_command(label="Remover", command=delete_service_page)
 
-    menu_bar.add_command(label="Sair", command=sair)
+    menu_bar.add_command(label="Sair", command=lambda: root.quit())
 
     root.config(menu=menu_bar)
 

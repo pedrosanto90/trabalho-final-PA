@@ -42,3 +42,4 @@ def add_client():
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=5, columnspan=2)
     adicionar_cliente.mainloop()
+

@@ -139,3 +139,4 @@ def update_photo():
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(atualizar_foto, text="Atualizar", command=atualizar).grid(row=1, columnspan=2)
     atualizar_foto.mainloop()
+

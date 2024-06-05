@@ -67,4 +67,4 @@ def list_all_payments():
         tk.Label(listar_pagamentos, text=state).grid(row=i, column=2)
         tk.Label(listar_pagamentos, text=typePayment).grid(row=i, column=3)
 
-    listar_pagamentos.mainloop()
+    listar_pagamentos.mainloop() 
