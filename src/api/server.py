@@ -25,7 +25,7 @@ def connect_db():
 def home():
     routes ={
         "clients": "/norauto/api/clients",
-        "vehicles": "/norauto/api/vehicles"
+        "payments": "/norauto/api/payments",
     }
     return jsonify(routes)
 
@@ -55,6 +55,30 @@ def get_clients():
             print("conexão ao mysql encerrada.")
     
     return jsonify({"error": "Unable to fetch clients"}), 500
+
+@app.route("/norauto/api/payments")
+def payments():
+    try:
+        # Conexão com o banco de dados
+        connection = connect_db()
+
+        if connection.is_connected():
+            cursor = connection.cursor(dictionary=True)
+
+            cursor.execute("SELECT * FROM payments")
+            payments = cursor.fetchall()
+            return jsonify(payments)
+        
+    except mysql.connector.Error as err:
+        return jsonify({"error": str(err)}), 500
+    
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("conexão ao mysql encerrada.")
+    
+    return jsonify({"error": "Unable to fetch payments"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005, debug=True)
