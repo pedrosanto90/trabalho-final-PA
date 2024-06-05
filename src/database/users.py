@@ -1,5 +1,8 @@
 import mysql.connector
 import bcrypt
+import os
+from mysql.connector import Error
+from dotenv import load_dotenv
 from src.ui.main import *
 
 load_dotenv()
@@ -7,7 +10,7 @@ PASSWORD= os.getenv("PASSWORD")
 
 def create_user(user_name, user_fullname, user_password, user_role):
     try:
-        connection = mysql.connector.connect(
+        condenection = mysql.connector.connect(
             host='localhost',
             database='trabalho_final',
             user='root',
