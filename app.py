@@ -2,9 +2,8 @@ from src.ui.user_admin import *
 from src.faceRec import *
 import tkinter as tk
 from tkinter import PhotoImage
+from src.database.database import *
 
-def takePicture():
-    takePic('pedro')
 try:
     connect()
 except:

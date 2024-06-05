@@ -1,9 +1,8 @@
-import tkinter as tk
-from tkinter import PhotoImage
-from src.database.database import *
 from src.ui.users import *
 from src.ui.payments import *
 from src.ui.services import *
+import tkinter as tk
+from tkinter import PhotoImage
 
 def main_window():
     def sair():
@@ -43,7 +42,7 @@ def main_window():
 
     root.config(menu=menu_bar)
 
-    logo = PhotoImage(file="../../assets/logo.png")
+    logo = PhotoImage(file="assets/logo.png")
     label_logo = tk.Label(root, image=logo, bg="#1f286d")
     label_logo.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 

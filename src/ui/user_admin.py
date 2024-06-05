@@ -5,7 +5,6 @@ from src.takePic import takePic
 from tkinter import messagebox
 
 def admin():
-    
     admin_login = tk.Toplevel()
     admin_login.title("Login Adminstrador")
     tk.Label(admin_login, text="Nome de utilizador:").grid(row=0, column=0)
