@@ -48,8 +48,11 @@ def create_tables():
 
     mycursor.execute('CREATE TABLE services (services_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_client_id INT, \
+<<<<<<< HEAD
     services_vehicle_id INT, \
     service_type VARCHAR(256), \
+=======
+>>>>>>> pedro
     service_description VARCHAR(1024), \
     service_start_date DATE, \
     service_end_date DATE, \

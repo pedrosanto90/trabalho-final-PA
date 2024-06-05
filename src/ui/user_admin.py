@@ -1,9 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
 from src.database.users import *
-from src.takePic import takePic
 from tkinter import messagebox
-
+from src.ui.main import *
+ 
 def admin():
     admin_login = tk.Toplevel()
     admin_login.title("Login Adminstrador")
@@ -13,10 +12,17 @@ def admin():
     ePassword = tk.Entry(admin_login, show="*")
     eUsername.grid(row=0, column=1)
     ePassword.grid(row=1, column=1)
-    
     def aLogin():
-        login(eUsername.get(), ePassword.get())
-
+        username = eUsername.get()
+        password = ePassword.get()
+        if username and password:
+            if login(username, password):
+                messagebox.showinfo("Sucesso", "Login efetuado com sucesso!")
+                main_window()
+            else:
+                messagebox.showerror("Erro", "Nome de utilizador ou palavra-passe incorretos.")
+        else:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+ 
     tk.Button(admin_login, text="Login", command=aLogin).grid(row=4, columnspan=2)
     admin_login.mainloop()
-
