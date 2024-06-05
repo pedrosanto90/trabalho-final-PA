@@ -43,7 +43,7 @@ def create_service(service_client_id, service_type, service_description,
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-def update_service(service_id, service_type, service_description, service_start_date, service_end_date, service_state, service_price):
+def update_service(service_id, service_client_id, service_type, service_description, service_start_date, service_end_date, service_state, service_price):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -59,7 +59,8 @@ def update_service(service_id, service_type, service_description, service_start_
 
             update_query = """
                 UPDATE services
-                SET service_type = %s,
+                SET service_client_id = %s,
+                    service_type = %s,
                     service_description = %s,
                     service_start_date = %s,
                     service_end_date = %s,
@@ -68,7 +69,7 @@ def update_service(service_id, service_type, service_description, service_start_
                     service_updated = %s
                 WHERE service_id = %s
             """
-            record = (service_type, service_description,
+            record = (service_client_id, service_type, service_description,
                       service_start_date, service_end_date, service_state, service_price, service_updated, service_id)
 
             cursor.execute(update_query, record)

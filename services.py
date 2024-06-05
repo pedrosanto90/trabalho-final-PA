@@ -7,7 +7,7 @@ def create_service_page():
     add_window = tk.Toplevel()
     add_window.title("Adicionar Serviço")
 
-    labels = ["Tipo de serviço", "Descrição", "Início", "Fim", "State", "Preço"]
+    labels = ["Cliente", "Tipo de serviço", "Descrição", "Início", "Fim", "Estado", "Preço"]
     entries = []
 
     for i, label in enumerate(labels):
@@ -33,13 +33,12 @@ def create_service_page():
 def update_service_page():
     update_window = tk.Toplevel()
     update_window.title("Atualizar Serviço")
-    update_window.geometry("400x300")
 
     tk.Label(update_window, text="Service ID").grid(row=0, column=0, padx=10, pady=5)
     service_id_entry = tk.Entry(update_window)
     service_id_entry.grid(row=0, column=1, padx=10, pady=5)
 
-    labels = ["Tipo de serviço", "Descrição", "Início", "Fim", "State", "Preço"]
+    labels = ["Cliente", "Tipo de serviço", "Descrição", "Início", "Fim", "Estado", "Preço"]
     entries = []
 
     for i, label in enumerate(labels):
@@ -48,7 +47,7 @@ def update_service_page():
             entry = DateEntry(update_window, date_pattern="dd/mm/yyyy")
         else:
             entry = tk.Entry(update_window)
-        entry.grid(row=i + 1, column=1, padx=10, pady=5)
+        entry.grid(row=i + 1, column=1, padx=10, pady=5 + len(labels))  # Ajuste na coluna
         entries.append(entry)
 
     def search_service():
@@ -56,7 +55,7 @@ def update_service_page():
         try:
             service = get_service_by_id(service_id)
             if service:
-                for i, key in enumerate(["service_type", "service_description", "service_start_date", "service_end_date", "service_state", "service_price"]):
+                for i, key in enumerate(["service_client_id", "service_type", "service_description", "service_start_date", "service_end_date", "service_state", "service_price"]):
                     entry = entries[i]
                     entry.delete(0, tk.END)
                     value = service[key]
@@ -67,11 +66,11 @@ def update_service_page():
             else:
                 messagebox.showinfo("Erro", "Serviço não encontrado")
         except Exception as e:
-            messagebox.showerror("Erro", f"Falha ao buscar serviço: {e}")
+            messagebox.showerror("Erro", f"Falha ao procurar o serviço: {e}")
 
     def on_submit():
         values = [entry.get_date() if isinstance(entry, DateEntry) else entry.get() for entry in entries]
-        values.append(service_id_entry.get())  # Add the service ID to the values for the update function
+        values.append(service_id_entry.get())  # Adiciona o ID do serviço aos valores para a função de atualização
         try:
             rows_affected = update_service(*values)
             if rows_affected > 0:
@@ -84,6 +83,7 @@ def update_service_page():
 
     tk.Button(update_window, text="Pesquisar", command=search_service).grid(row=0, column=2, padx=10, pady=5)
     tk.Button(update_window, text="Atualizar", command=on_submit).grid(row=len(labels) + 1, column=1, pady=10)
+
 
 def delete_service_page():
     delete_window = tk.Toplevel()

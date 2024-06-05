@@ -52,7 +52,7 @@ def create_tables():
     service_description VARCHAR(1024), \
     service_start_date DATE, \
     service_end_date DATE, \
-    service_state INT, \
+    service_state VARCHAR(50), \
     service_price INT, \
     service_created DATE, \
     service_updated DATE, \
