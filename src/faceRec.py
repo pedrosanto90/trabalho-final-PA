@@ -16,8 +16,6 @@ if not os.path.exists(path):
 
 # List images in the directory
 myList = os.listdir(path)
-if not myList:
-    raise ValueError(f"No images found in directory '{path}'.")
 
 print(myList)
 

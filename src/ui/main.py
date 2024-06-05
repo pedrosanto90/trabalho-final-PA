@@ -42,7 +42,7 @@ def main_window():
 
     root.config(menu=menu_bar)
 
-    logo = PhotoImage(file="assets/logo.png")
+    logo = PhotoImage(file="assets/logo.png", master=root)
     label_logo = tk.Label(root, image=logo, bg="#1f286d")
     label_logo.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
