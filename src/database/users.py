@@ -107,7 +107,7 @@ def login(user_name, user_password):
                 return False
             
     except Error as err:
-        print(f'Erro ao conectar a base ede dados: {err}')
+        print(f'Erro ao conectar a base de dados: {err}')
 
     finally:
         if connection.is_connected():
