@@ -105,10 +105,10 @@ def login(user_name, user_password):
                     return False
             else:
                 print("Utilizador não encontrado.")
-                return False
+                return "Utilizador não encontrado."
             
     except Error as err:
-        print(f'Erro ao conectar a base ede dados: {err}')
+        print(f'Erro ao criar o utilizador: {err}')
 
     finally:
         if connection.is_connected():
