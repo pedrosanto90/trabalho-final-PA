@@ -44,7 +44,16 @@ def get_clients():
         
             cursor.execute("SELECT * FROM clients")
             clients = cursor.fetchall()
-            return jsonify(clients)
+
+            clients_dict = {client['client_id']: {
+                "client_address": client['client_address'],
+                "client_created": client['client_created'],
+                "client_email": client['client_email'],
+                "client_mobile": client['client_mobile'],
+                "client_name": client['client_name'],
+                "client_nif": client['client_nif']
+            } for client in clients}
+            return jsonify(clients_dict)
         
     except mysql.connector.Error as err:
         return jsonify({"error": str(err)}), 500
@@ -68,7 +77,13 @@ def payments():
 
             cursor.execute("SELECT * FROM payments")
             payments = cursor.fetchall()
-            return jsonify(payments)
+            payments_dict = {payment['payment_id']: {
+                "payment_date": payment['payment_date'],
+                "payment_value": payment['payment_value'],
+                "payment_state": payment['payment_state'],
+                "payment_type": payment['payment_type']
+            } for payment in payments}
+            return jsonify(payments_dict)
         
     except mysql.connector.Error as err:
         return jsonify({"error": str(err)}), 500
@@ -93,7 +108,29 @@ def services():
 
             cursor.execute("SELECT * FROM services")
             services = cursor.fetchall()
-            return jsonify(services)
+    # mycursor.execute('CREATE TABLE services (service_id INT AUTO_INCREMENT PRIMARY KEY, \
+    # service_client_id INT, \
+    # service_type VARCHAR(50), \
+    # service_description VARCHAR(1024), \
+    # service_start_date DATE, \
+    # service_end_date DATE, \
+    # service_state INT, \
+    # service_price INT, \
+    # service_created DATE, \
+    # service_updated DATE, \
+    # FOREIGN KEY(service_client_id) REFERENCES clients(client_id))')
+            services_dict = {service['service_id']: {
+                "service_client_id": service['service_client_id'],
+                "service_created": service['service_created'],
+                "service_description": service['service_description'],
+                "service_end_date": service['service_end_date'],
+                "service_price": service['service_price'],
+                "service_start_date": service['service_start_date'],
+                "service_state": service['service_state'],
+                "service_type": service['service_type'],
+                "service_updated": service['service_updated']
+            } for service in services}
+            return jsonify(services_dict)
         
     except mysql.connector.Error as err:
         return jsonify({"error": str(err)}), 500
