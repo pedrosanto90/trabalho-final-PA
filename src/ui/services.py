@@ -7,12 +7,12 @@ def create_service_page():
     add_window = tk.Toplevel()
     add_window.title("Adicionar Serviço")
 
-    labels = ["Vehicle ID", "Type ID", "State ID", "Description", "Start Date", "End Date", "State", "Price", "Price Material"]
+    labels = ["Tipo de serviço", "Descrição", "Início", "Fim", "State", "Preço"]
     entries = []
 
     for i, label in enumerate(labels):
         tk.Label(add_window, text=label).grid(row=i, column=0)
-        if label in ["Start Date", "End Date"]:
+        if label in ["Início", "Fim"]:
             # Se a etiqueta for "Start Date" ou "End Date", cria um DateEntry widget
             entry = DateEntry(add_window, date_pattern="dd/mm/yyyy")
         else:
@@ -32,12 +32,12 @@ def update_service_page():
     update_window = tk.Toplevel()
     update_window.title("Atualizar Serviço")
 
-    labels = ["Service ID", "Vehicle ID", "Type ID", "State ID", "Description", "Start Date", "End Date", "State", "Price", "Price Material"]
+    labels = ["Tipo de serviço", "Descrição", "Início", "Fim", "State", "Preço"]
     entries = []
 
     for i, label in enumerate(labels):
         tk.Label(update_window, text=label).grid(row=i, column=0)
-        if label in ["Start Date", "End Date"]:
+        if label in ["Início", "Fim"]:
             entry = DateEntry(update_window, date_pattern="dd/mm/yyyy")
         else:
             entry = tk.Entry(update_window)

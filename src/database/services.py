@@ -7,8 +7,8 @@ from datetime import datetime
 load_dotenv()
 PASSWORD = os.getenv("PASSWORD")
 
-def create_service(service_vehicle_id, service_type_id, service_state_id, service_description, \
-                   service_start, service_end, service_state, service_price, service_price_material):
+def create_service(service_type_id, service_description,
+                   service_start, service_end, service_state, service_price):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -25,12 +25,12 @@ def create_service(service_vehicle_id, service_type_id, service_state_id, servic
 
             # consulta sql para inserir um novo cliente
             insert_query = """
-                insert into services (service_vehicle_id, service_type_id, service_state_id, service_description, \
-                service_start, service_end, service_state, service_price, service_price_material, service_created)
-                values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                insert into services (service_type_id, service_description, \
+                service_start, service_end, service_state, service_price, service_created)
+                values (%s, %s, %s, %s, %s, %s, %s)
                 """
-            record = (service_vehicle_id, service_type_id, service_state_id, service_description, \
-                      service_start, service_end, service_state, service_price, service_price_material, \
+            record = (service_type_id, service_description, \
+                      service_start, service_end, service_state, service_price,\
                       service_created)
 
             # executar a consulta
@@ -47,8 +47,7 @@ def create_service(service_vehicle_id, service_type_id, service_state_id, servic
             connection.close()
             print("conexão ao mysql encerrada.")
 
-def update_service(service_id, service_vehicle_id, service_type_id, service_state_id, service_description, \
-                   service_start, service_end, service_state, service_price, service_price_material):
+def update_service(service_id):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -66,21 +65,17 @@ def update_service(service_id, service_vehicle_id, service_type_id, service_stat
             # Consulta SQL para atualizar um serviço
             update_query = """
                 UPDATE services
-                SET service_vehicle_id = %s,
-                    service_type_id = %s,
-                    service_state_id = %s,
+                SET service_type_id = %s,
                     service_description = %s,
                     service_start = %s,
                     service_end = %s,
                     service_state = %s,
                     service_price = %s,
-                    service_price_material = %s,
                     service_updated = %s
                 WHERE service_id = %s
                 """
-            record = (service_vehicle_id, service_type_id, service_state_id, service_description, \
-                      service_start, service_end, service_state, service_price, service_price_material, \
-                      service_updated, service_id)
+            record = (service_type_id, service_description, \
+                      service_start, service_end, service_state, service_price, service_id)
 
             # Executar a consulta
             cursor.execute(update_query, record)
