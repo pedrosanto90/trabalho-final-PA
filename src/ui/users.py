@@ -5,14 +5,14 @@ from src.takePic import takePic
 from tkinter import messagebox
 
 def add_user():
-    adicionar_cliente = tk.Toplevel()
-    adicionar_cliente.title("Criar utilizador")
-    tk.Label(adicionar_cliente, text="Nome de utilizador:").grid(row=0, column=0)
-    tk.Label(adicionar_cliente, text="Nome completo:").grid(row=1, column=0)
-    tk.Label(adicionar_cliente, text="Cargo:").grid(row=2, column=0)
-    eName = tk.Entry(adicionar_cliente)
-    eFullName = tk.Entry(adicionar_cliente)
-    eRole = ttk.Combobox(adicionar_cliente, values=["Admin", "Operador", "Contabilidade"])
+    adicionar_utilizador = tk.Toplevel()
+    adicionar_utilizador.title("Criar utilizador")
+    tk.Label(adicionar_utilizador, text="Nome de utilizador:").grid(row=0, column=0)
+    tk.Label(adicionar_utilizador, text="Nome completo:").grid(row=1, column=0)
+    tk.Label(adicionar_utilizador, text="Cargo:").grid(row=2, column=0)
+    eName = tk.Entry(adicionar_utilizador)
+    eFullName = tk.Entry(adicionar_utilizador)
+    eRole = ttk.Combobox(adicionar_utilizador, values=["Admin", "Operador", "Contabilidade"])
     eName.grid(row=0, column=1)
     eFullName.grid(row=1, column=1)
     eRole.grid(row=2, column=1)
@@ -38,7 +38,7 @@ def add_user():
                             create_user(name, fullName, password, role)
                             messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
                             pedir_password.destroy()
-                            adicionar_cliente.destroy()
+                            adicionar_utilizador.destroy()
                         else:
                             messagebox.showerror("Erro", "Palavras-passe não correspondem.")
                     else:
@@ -48,11 +48,11 @@ def add_user():
             else:
                 takePic(name)
                 messagebox.showinfo("Sucesso", "Utilizador criado com sucesso!")
-                adicionar_cliente.destroy()
+                adicionar_utilizador.destroy()
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-    tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
-    adicionar_cliente.mainloop()
+    tk.Button(adicionar_utilizador, text="Adicionar", command=adicionar).grid(row=4, columnspan=2)
+    adicionar_utilizador.mainloop()
 
 def remove_user():
     remover_cliente = tk.Toplevel()

@@ -1,6 +1,7 @@
 from src.ui.users import *
 from src.ui.payments import *
 from src.ui.services import *
+from src.ui.clients import *
 import tkinter as tk
 from tkinter import PhotoImage
 
@@ -24,7 +25,7 @@ def main_window():
 
     menu_clientes = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
-    menu_clientes.add_command(label="Adicionar")
+    menu_clientes.add_command(label="Adicionar", command=add_client)
     menu_clientes.add_command(label="Remover")
 
     menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
