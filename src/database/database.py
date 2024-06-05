@@ -48,16 +48,12 @@ def create_tables():
 
     mycursor.execute('CREATE TABLE services (services_id INT AUTO_INCREMENT PRIMARY KEY, \
     service_client_id INT, \
-    services_vehicle_id INT, service_type INT, \
     service_description VARCHAR(1024), \
     service_start_date DATE, \
     service_end_date DATE, \
     service_state INT, \
     service_price INT, \
-    FOREIGN KEY(services_vehicle_id) REFERENCES vehicles(vehicle_id), \
-    FOREIGN KEY(service_type) REFERENCES service_types(service_type_id), \
-    FOREIGN KEY(service_client_id) REFERENCES clients(client_id), \
-    FOREIGN KEY(service_state) REFERENCES states(state_id))')
+    FOREIGN KEY(service_client_id) REFERENCES clients(client_id))')
 
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
     payment_service_id INT, \
