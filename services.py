@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkcalendar import DateEntry
 from src.database.services import *
+from src.database.clients import verify_client
 
 def create_service_page():
     add_window = tk.Toplevel()
@@ -10,26 +11,52 @@ def create_service_page():
 
     labels = ["Cliente", "Tipo de serviço", "Descrição", "Preço"]
     entries = []
-
     for i, label in enumerate(labels):
         tk.Label(add_window, text=label).grid(row=i, column=0)
-        if label in ["Tipo de serviço"]:
+        if label == "Tipo de serviço":
             entry = ttk.Combobox(add_window, values=["Manutenção", "Colisão"])
+        elif label == "Preço":
+            entry = tk.Entry(add_window)
+            entry.insert(0, "0.0")  # Define o valor inicial como 0.0
         else:
             entry = tk.Entry(add_window)
         entry.grid(row=i, column=1)
         entries.append(entry)
 
     def on_submit():
-        values = [entry.get_date() if isinstance(entry, DateEntry) else entry.get() for entry in entries]
+        client_id = entries[0].get().strip()
+        service_type = entries[1].get().strip()
+        description = entries[2].get().strip()
+        price = entries[3].get().strip()
+
+        if not client_id or not service_type or not description or not price:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+            return
+
+        if service_type not in ["Manutenção", "Colisão"]:
+            messagebox.showerror("Erro", "Tipo de serviço inválido.")
+            return
+
         try:
-            create_service(*values)
-            messagebox.showinfo("Sucesso", "Serviço criado com sucesso!")
-            add_window.destroy()
-        except Exception as e:
-            messagebox.showerror("Erro", f"Falha ao criar serviço: {e}")
+            price = float(price)
+            if price < 0:
+                raise ValueError
+        except ValueError:
+            messagebox.showerror("Erro", "Preço inválido. Deve ser um valor positivo.")
+            return
+
+        if verify_client(client_id):
+            try:
+                create_service(client_id, service_type, description, price)
+                messagebox.showinfo("Sucesso", "Serviço criado com sucesso!")
+                add_window.destroy()
+            except Exception as e:
+                messagebox.showerror("Erro", f"Falha ao criar serviço: {e}")
+        else:
+            messagebox.showerror("Erro", "ID do cliente não existe.")
 
     tk.Button(add_window, text="Começar", command=on_submit).grid(row=len(labels), column=1)
+    add_window.mainloop()
 
 def update_service_page():
     update_window = tk.Toplevel()
@@ -37,9 +64,19 @@ def update_service_page():
     tk.Label(update_window, text="ID do serviço:").grid(row=0, column=0)
     eId = tk.Entry(update_window)
     eId.grid(row=0, column=1)
+
     def terminar():
-        id = eId.get()
-        update_service(id)
+        service_id = eId.get().strip()
+        if service_id:
+            try:
+                update_service(service_id)
+                messagebox.showinfo("Sucesso", "Serviço finalizado com sucesso!")
+                update_window.destroy()
+            except Exception as e:
+                messagebox.showerror("Erro", f"Falha ao finalizar serviço: {e}")
+        else:
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+
     tk.Button(update_window, text="Terminar", command=terminar).grid(row=3, columnspan=2)
     update_window.mainloop()
 

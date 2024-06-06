@@ -63,7 +63,7 @@ def finish_payment():
                     metodo = eMetodo.get()
                     if metodo:
                         update_payment(id, metodo)
-                        messagebox.showinfo("Sucesso", "Palavra-passe alterada com sucesso!")
+                        messagebox.showinfo("Sucesso", "Pagamento finalizado com sucesso!")
                         pedir_metodo.destroy()
                         finalizar_pagamento.destroy()
                     else:
@@ -71,7 +71,7 @@ def finish_payment():
                 tk.Button(pedir_metodo, text="Guardar", command=guardar).grid(row=4, columnspan=2)
                 pedir_metodo.mainloop()
             else:
-                messagebox.showerror("Erro", "Utilizador não existe.")
+                messagebox.showerror("Erro", "Serviço não existe.")
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
     tk.Button(finalizar_pagamento, text="Procurar", command=procurar).grid(row=3, columnspan=2)
