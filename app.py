@@ -10,6 +10,9 @@ except:
     create_tables()
     create_user("admin", "Admin", "admin", "Admin")
 
+def quit_login():
+    root.destroy()
+
 def admin():
     admin_login = tk.Toplevel()
     admin_login.title("Login Adminstrador")
