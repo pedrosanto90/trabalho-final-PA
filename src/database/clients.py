@@ -95,6 +95,8 @@ def delete_client(client_id):
 
         if connection.is_connected():
             cursor = connection.cursor()
+            # query para eliminar servicos associados a um cliente
+            cursor.execute("DELETE FROM services WHERE service_client_id = %s", (client_id,))
 
             # Consulta SQL para deletar um cliente
             delete_query = """
