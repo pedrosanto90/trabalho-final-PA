@@ -143,7 +143,7 @@ def list_services():
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-def get_services_by_date(date):
+def list_services_by_date(date):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -153,9 +153,11 @@ def get_services_by_date(date):
         )
 
         if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             query = """
-            SELECT * FROM services
+            SELECT service_id, service_client_id, service_type, service_description, 
+                   DATE_FORMAT(service_start_date, "%d/%m/%Y"), DATE_FORMAT(service_end_date, "%d/%m/%Y"), service_state 
+            FROM services
             WHERE DATE(service_start_date) = %s
             """
             cursor.execute(query, (date,))

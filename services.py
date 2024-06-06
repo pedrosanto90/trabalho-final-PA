@@ -84,30 +84,34 @@ def list_service_page():
     list_window = tk.Toplevel()
     list_window.title("Lista de Serviços")
 
-    tk.Label(list_window, text="ID").grid(row=0, column=0)
-    tk.Label(list_window, text="ID Cliente").grid(row=0, column=1)
-    tk.Label(list_window, text="Tipo").grid(row=0, column=2)
-    tk.Label(list_window, text="Descrição").grid(row=0, column=3)
-    tk.Label(list_window, text="Data de início").grid(row=0, column=4)
-    tk.Label(list_window, text="Data de fim").grid(row=0, column=5)
-    tk.Label(list_window, text="Estado").grid(row=0, column=6)
+    tk.Label(list_window, text="Filtrar por data:").grid(row=0, column=2, columnspan=3)
+    date_entry = DateEntry(list_window, date_pattern="dd/mm/yyyy")
+    date_entry.grid(row=0, column=4, columnspan=4)
+    tk.Button(list_window, text="Filtrar", command=lambda: filter_services(date_entry.get_date())).grid(row=0, column=6, columnspan=3)
 
-    services = list_services()
+    columns = ["ID", "ID Cliente", "Tipo", "Descrição", "Data de início", "Data de fim", "Estado"]
+    for i, column in enumerate(columns):
+        tk.Label(list_window, text=column).grid(row=1, column=i)
 
-    if not services:
-        messagebox.showinfo("Info", "Não há serviços para mostrar.")
-        list_window.destroy()
-        return
+    def filter_services(date):
+        for widget in list_window.grid_slaves():
+            if int(widget.grid_info()["row"]) > 1:
+                widget.grid_forget()
 
-    for i, element in enumerate(services, start=1):
-        id, client, type, desc, date_inic, date_fim, state = element
-        tk.Label(list_window, text=id).grid(row=i, column=0)
-        tk.Label(list_window, text=client).grid(row=i, column=1)
-        tk.Label(list_window, text=type).grid(row=i, column=2)
-        tk.Label(list_window, text=desc).grid(row=i, column=3)
-        tk.Label(list_window, text=date_inic).grid(row=i, column=4)
-        tk.Label(list_window, text=date_fim).grid(row=i, column=5)
-        tk.Label(list_window, text=state).grid(row=i, column=6)
+        services = list_services_by_date(date)
+        if not services:
+            messagebox.showinfo("Info", "Não há serviços para mostrar.")
+            return
+
+        for i, element in enumerate(services, start=2):
+            id, client, type, desc, date_inic, date_fim, state = element
+            tk.Label(list_window, text=id).grid(row=i, column=0)
+            tk.Label(list_window, text=client).grid(row=i, column=1)
+            tk.Label(list_window, text=type).grid(row=i, column=2)
+            tk.Label(list_window, text=desc).grid(row=i, column=3)
+            tk.Label(list_window, text=date_inic).grid(row=i, column=4)
+            tk.Label(list_window, text=date_fim).grid(row=i, column=5)
+            tk.Label(list_window, text=state).grid(row=i, column=6)
 
     list_window.mainloop()
 

@@ -1,4 +1,4 @@
-from src.faceRec import *
+#from src.faceRec import *
 from src.database.database import *
 from main import *
 from src.database.users import create_user
@@ -47,10 +47,10 @@ canvas = tk.Canvas(root, width=logo.width(), height=logo.height(), bg="#1f286d",
 canvas.pack(expand=True)
 canvas.create_image(0, 0, anchor="nw", image=logo)
 
-button_login = tk.Button(root, text="Login", command=faceRec)
+#button_login = tk.Button(root, text="Login", command=faceRec)
 button_admin_login = tk.Button(root, text="Admin Login", command=admin)
 
-button_window = canvas.create_window(logo.width() // 2, (logo.height() // 2) + 125, anchor="center", window=button_login)
+#button_window = canvas.create_window(logo.width() // 2, (logo.height() // 2) + 125, anchor="center", window=button_login)
 button_window_admin_login = canvas.create_window(logo.width() // 2, (logo.height() // 2) + 160, anchor="center", window=button_admin_login)
 
 root.mainloop()
