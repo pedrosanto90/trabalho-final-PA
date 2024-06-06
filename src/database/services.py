@@ -174,6 +174,7 @@ def list_services_by_date(date):
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
+
 def get_service_by_id(service_id):
     try:
         connection = mysql.connector.connect(

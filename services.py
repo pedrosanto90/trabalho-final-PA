@@ -115,6 +115,7 @@ def list_service_page():
 
     list_window.mainloop()
 
+
 '''def update_service_page():
     update_window = tk.Toplevel()
     update_window.title("Finalizar Serviço")
