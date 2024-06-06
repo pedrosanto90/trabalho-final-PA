@@ -173,30 +173,3 @@ def list_services_by_date(date):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
-
-
-def get_service_by_id(service_id):
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='trabalho_final',
-            user='root',
-            password=PASSWORD
-        )
-
-        if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
-            query = "SELECT * FROM services WHERE service_id = %s"
-            cursor.execute(query, (service_id,))
-            service = cursor.fetchone()
-            return service
-
-    except mysql.connector.Error as err:
-        print("Erro ao conectar ao MySQL:", err)
-        return None
-
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("Conexão ao MySQL encerrada.")
