@@ -54,7 +54,6 @@ def list_service_page():
     tk.Label(list_window, text="Data de início").grid(row=0, column=4)
     tk.Label(list_window, text="Data de fim").grid(row=0, column=5)
     tk.Label(list_window, text="Estado").grid(row=0, column=6)
-    tk.Label(list_window, text="Preço").grid(row=0, column=7)
 
     services = list_services()
 
@@ -64,7 +63,7 @@ def list_service_page():
         return
 
     for i, element in enumerate(services, start=1):
-        id, client, type, desc, date_inic, date_fim, state, price = element
+        id, client, type, desc, date_inic, date_fim, state = element
         tk.Label(list_window, text=id).grid(row=i, column=0)
         tk.Label(list_window, text=client).grid(row=i, column=1)
         tk.Label(list_window, text=type).grid(row=i, column=2)
@@ -72,7 +71,6 @@ def list_service_page():
         tk.Label(list_window, text=date_inic).grid(row=i, column=4)
         tk.Label(list_window, text=date_fim).grid(row=i, column=5)
         tk.Label(list_window, text=state).grid(row=i, column=6)
-        tk.Label(list_window, text=price).grid(row=i, column=7)
 
     list_window.mainloop()
 

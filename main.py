@@ -32,14 +32,15 @@ def main_window(role):
     if role == "Admin" or role == "Contabilidade":
         menu_pagamentos = tk.Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="Pagamentos", menu=menu_pagamentos)
-        menu_pagamentos.add_command(label="Adicionar", command=add_payment)
+        menu_pagamentos.add_command(label="Finalizar", command=finish_payment)
         menu_pagamentos.add_command(label="Lista de Pagamentos", command=list_all_payments)
 
+    menu_services = tk.Menu(menu_bar, tearoff=0)
+    menu_bar.add_cascade(label="Serviços", menu=menu_services)
     if role == "Admin" or role == "Operador":
-        menu_services = tk.Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Serviços", menu=menu_services)
         menu_services.add_command(label="Começar", command=create_service_page)
         menu_services.add_command(label="Terminar", command=update_service_page)
+    if role == "Admin" or role == "Contabilidade":
         menu_services.add_command(label="Lista de Serviços", command=list_service_page)
 
     menu_bar.add_command(label="Sair", command=lambda: sys.exit())

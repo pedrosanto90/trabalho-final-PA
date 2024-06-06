@@ -21,13 +21,20 @@ def create_service(service_client_id, service_type, service_description, service
 
             insert_query = """
                 INSERT INTO services (service_client_id, service_type, service_description,
-                service_start_date, service_state, service_price)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                service_start_date, service_state)
+                VALUES (%s, %s, %s, %s, %s)
             """
             record = (service_client_id, service_type, service_description,
-                      datetime.now().strftime('%Y-%m-%d'), "Começado", service_price)
+                      datetime.now().strftime('%Y-%m-%d'), "Começado")
+
+            insert_query_2 = """
+                INSERT INTO payments (payment_service_id, payment_value, payment_state)
+                VALUES ((SELECT service_id FROM services ORDER BY service_id DESC LIMIT 1), %s, %s)
+            """
+            record_2 = (service_price, "Por pagar")
 
             cursor.execute(insert_query, record)
+            cursor.execute(insert_query_2, record_2)
             connection.commit()
             print("Serviço inserido com sucesso.")
 
@@ -120,7 +127,7 @@ def list_services():
         if connection.is_connected():
             cursor = connection.cursor()
             query = """
-            SELECT * FROM services
+            SELECT service_id, service_client_id, service_type, service_description, DATE_FORMAT(service_start_date, "%d/%m/%Y"), DATE_FORMAT(service_end_date, "%d/%m/%Y"), service_state FROM services
             """
             cursor.execute(query)
             services = cursor.fetchall()
