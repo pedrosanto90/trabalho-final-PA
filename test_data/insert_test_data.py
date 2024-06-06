@@ -45,9 +45,9 @@ def insert_data():
         for i in range(1, 11)
     ]
 
-    service_sql = "INSERT INTO services (service_client_id, service_type, service_description, service_start_date, service_end_date, service_state, service_price, service_created, service_updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    mycursor.executemany(service_sql, services)
-    mydb.commit()
+    # service_sql = "INSERT INTO services (service_client_id, service_type, service_description, service_start_date, service_end_date, service_state, service_price) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    # mycursor.executemany(service_sql, services)
+    # mydb.commit()
 
     # Generate data for payments
     payments = [

@@ -118,7 +118,7 @@ def list_services():
         )
 
         if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             query = """
             SELECT * FROM services
             """
