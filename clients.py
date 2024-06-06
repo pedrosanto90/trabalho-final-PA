@@ -3,6 +3,7 @@ from tkinter import ttk
 from src.database.clients import *
 from tkinter import messagebox
 import re
+from src.database.clients import existe_cliente
 
 def add_client():
     adicionar_cliente = tk.Toplevel()
@@ -32,7 +33,7 @@ def add_client():
     def validar_email(email):
         pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         return re.match(pattern, email) is not None
-
+    
     def adicionar():
         name = eName.get()
         address = eAddress.get()
@@ -48,6 +49,9 @@ def add_client():
                 return
             if not (mobile.isdigit() and len(mobile) == 9):
                 messagebox.showerror("Erro", "Número de telefone deve conter exatamente 9 dígitos.")
+                return
+            if not existe_cliente(nif):
+                messagebox.showerror("Erro", "Cliente já existe.")
                 return
             create_client(name, address, nif, mobile, mail)
             messagebox.showinfo("Sucesso", "Cliente criado com sucesso!")
