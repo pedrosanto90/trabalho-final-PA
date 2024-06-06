@@ -42,7 +42,7 @@ def create_service_page():
             if price < 0:
                 raise ValueError
         except ValueError:
-            messagebox.showerror("Erro", "Preço inválido. Deve ser um valor positivo.")
+            messagebox.showerror("Erro", "Preço inválido.")
             return
 
         if verify_client(client_id):
