@@ -132,7 +132,7 @@ def list_clients():
             cursor = connection.cursor()
 
             # SQL query to select all payments
-            select_query = """SELECT * FROM clients"""
+            select_query = """SELECT client_id, client_name, client_address, client_nif, client_mobile, client_email, DATE_FORMAT(client_created, "%d/%m/%Y") FROM clients"""
 
             # Execute the query
             cursor.execute(select_query)

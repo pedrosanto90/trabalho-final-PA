@@ -90,7 +90,7 @@ def list_all_clients():
     tk.Label(listar_clients, text="NIF").grid(row=0, column=3)
     tk.Label(listar_clients, text="Telefone").grid(row=0, column=4)
     tk.Label(listar_clients, text="Email").grid(row=0, column=5)
-    tk.Label(listar_clients, text="Criado").grid(row=0, column=6)
+    tk.Label(listar_clients, text="Criado a").grid(row=0, column=6)
 
     clients = list_clients()
 

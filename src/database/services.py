@@ -7,8 +7,7 @@ from datetime import datetime
 load_dotenv()
 PASSWORD = os.getenv("PASSWORD")
 
-def create_service(service_client_id, service_type, service_description,
-                   service_start_date, service_end_date, service_state, service_price):
+def create_service(service_client_id, service_type, service_description, service_price):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -20,15 +19,13 @@ def create_service(service_client_id, service_type, service_description,
         if connection.is_connected():
             cursor = connection.cursor()
 
-            service_created = datetime.now().strftime('%Y-%m-%d')
-
             insert_query = """
                 INSERT INTO services (service_client_id, service_type, service_description,
-                service_start_date, service_end_date, service_state, service_price, service_created)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                service_start_date, service_state, service_price)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """
             record = (service_client_id, service_type, service_description,
-                      service_start_date, service_end_date, service_state, service_price, service_created)
+                      datetime.now().strftime('%Y-%m-%d'), "Começado", service_price)
 
             cursor.execute(insert_query, record)
             connection.commit()
@@ -43,7 +40,7 @@ def create_service(service_client_id, service_type, service_description,
             connection.close()
             print("Conexão ao MySQL encerrada.")
 
-def update_service(service_id, service_client_id, service_type, service_description, service_start_date, service_end_date, service_state, service_price):
+def update_service(service_id):
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -55,22 +52,13 @@ def update_service(service_id, service_client_id, service_type, service_descript
         if connection.is_connected():
             cursor = connection.cursor()
 
-            service_updated = datetime.now().strftime('%Y-%m-%d')
-
             update_query = """
                 UPDATE services
-                SET service_client_id = %s,
-                    service_type = %s,
-                    service_description = %s,
-                    service_start_date = %s,
-                    service_end_date = %s,
-                    service_state = %s,
-                    service_price = %s,
-                    service_updated = %s
+                SET service_end_date = %s,
+                    service_state = %s
                 WHERE service_id = %s
             """
-            record = (service_client_id, service_type, service_description,
-                      service_start_date, service_end_date, service_state, service_price, service_updated, service_id)
+            record = (datetime.now().strftime('%Y-%m-%d'), "Terminado", service_id)
 
             cursor.execute(update_query, record)
             connection.commit()
@@ -113,6 +101,34 @@ def delete_service(service_id):
     except Error as err:
         print("Erro ao conectar ao MySQL:", err)
         return 0
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")
+
+def list_services():
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor(dictionary=True)
+            query = """
+            SELECT * FROM services
+            """
+            cursor.execute(query)
+            services = cursor.fetchall()
+            return services
+
+    except mysql.connector.Error as err:
+        print("Erro ao conectar ao MySQL:", err)
+        return []
 
     finally:
         if connection.is_connected():
