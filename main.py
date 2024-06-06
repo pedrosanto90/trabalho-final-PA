@@ -40,8 +40,7 @@ def main_window(role):
     if role == "Admin" or role == "Operador":
         menu_services.add_command(label="Começar", command=create_service_page)
         menu_services.add_command(label="Terminar", command=update_service_page)
-    if role == "Admin" or role == "Contabilidade":
-        menu_services.add_command(label="Lista de Serviços", command=list_service_page)
+    menu_services.add_command(label="Lista de Serviços", command=list_service_page)
 
     menu_bar.add_command(label="Sair", command=lambda: sys.exit())
 
