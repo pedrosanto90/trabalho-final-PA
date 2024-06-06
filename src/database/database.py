@@ -53,7 +53,6 @@ def create_tables():
     service_start_date DATE, \
     service_end_date DATE, \
     service_state VARCHAR(50), \
-    service_price FLOAT, \
     FOREIGN KEY(service_client_id) REFERENCES clients(client_id))')
 
     mycursor.execute('CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, \
@@ -61,7 +60,8 @@ def create_tables():
     payment_date DATE, \
     payment_value FLOAT, \
     payment_state VARCHAR(50), \
-    payment_type VARCHAR(50))')
+    payment_type VARCHAR(50), \
+    FOREIGN KEY(payment_service_id) REFERENCES services(service_id))')
 
     mycursor.execute('CREATE TABLE users (user_id INT AUTO_INCREMENT PRIMARY KEY, \
     user_name VARCHAR(50), \
