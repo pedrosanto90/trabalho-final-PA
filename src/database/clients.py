@@ -7,6 +7,25 @@ from datetime import datetime
 load_dotenv()
 PASSWORD = os.getenv("PASSWORD")
 
+def existe_cliente(nif):
+
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            cursor.execute('SELECT client_nif FROM clients WHERE client_nif=%s', (nif,))
+            result = cursor.fetchone() 
+            print(result)
+            if result is None:
+                return True
+            else:
+                return False
 
 def create_client(client_name, client_address, client_nif, client_mobile, client_email):
     try:
