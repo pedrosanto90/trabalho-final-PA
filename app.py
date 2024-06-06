@@ -1,4 +1,4 @@
-#from src.faceRec import *
+from src.faceRec import *
 from src.database.database import *
 from main import *
 from src.database.users import create_user
