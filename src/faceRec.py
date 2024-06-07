@@ -17,7 +17,6 @@ if not os.path.exists(path):
 # List images in the directory
 myList = os.listdir(path)
 
-print(myList)
 
 # Load images and class names
 for cl in myList:
@@ -27,7 +26,6 @@ for cl in myList:
         continue
     images.append(curImg)
     classNames.append(os.path.splitext(cl)[0])
-print(classNames)
 
 # Function to find encodings for all images
 def findEncodings(images):
