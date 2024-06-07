@@ -13,7 +13,7 @@
 ## Executar o projeto:
 
 Necessario criar diretorio *images* na raiz do projecto.
-python app.py
+
 Ao rodar o ficheiro app.py pela primeira vez, a base de dados e gerada automaticamente e o utilizador *admin* 
 e criado com a passoword *admin*.
 
