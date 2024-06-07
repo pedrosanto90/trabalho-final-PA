@@ -1,3 +1,4 @@
+# importacao das bibliotecas e modulos necessarias
 import cv2
 import numpy as np
 import face_recognition
@@ -5,20 +6,20 @@ import os
 from main import main_window
 from src.database.users import verify_login, login_fullname
 
-# Define path to images
+# Definir o caminho para as imagens
 path = 'images'
 images = []
 classNames = []
 
-# Ensure the path exists
+# Verifica se o diretório existe
 if not os.path.exists(path):
     raise FileNotFoundError(f"The directory '{path}' does not exist.")
 
-# List images in the directory
+# Lista as images do diretorio
 myList = os.listdir(path)
 
 
-# Load images and class names
+# Carregas as imagens do diretorio
 for cl in myList:
     curImg = cv2.imread(os.path.join(path, cl))
     if curImg is None:
@@ -27,7 +28,7 @@ for cl in myList:
     images.append(curImg)
     classNames.append(os.path.splitext(cl)[0])
 
-# Function to find encodings for all images
+# Funcao para 
 def findEncodings(images):
     encodeList = []
     for img in images:
@@ -45,7 +46,7 @@ def faceRec():
     print('Encoding Complete')
 
     # Start webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     if not cap.isOpened():
         raise RuntimeError("Error: Could not open webcam.")
@@ -80,7 +81,7 @@ def faceRec():
                     cv2.imshow('Webcam', img)
                     cv2.waitKey(2500)  # Wait for 2.5 seconds
                     cap.release()
-                    cv2.destroyAllWindows()
+
                     if verify_login(name) == "Operador":
                         main_window("Operador", login_fullname(name))
                     else:

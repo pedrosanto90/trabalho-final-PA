@@ -1,7 +1,7 @@
 import cv2
 
 def takePic(nome):
-    cam_port = 0 #1 para o pedro
+    cam_port = 1 #1 para o pedro
     cam = cv2.VideoCapture(cam_port) 
 
     while True:
@@ -23,4 +23,3 @@ def takePic(nome):
 
 
     cv2.destroyAllWindows()
-
