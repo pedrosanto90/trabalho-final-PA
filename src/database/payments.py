@@ -184,7 +184,8 @@ def verify_payment(payment_service_id):
             cursor = connection.cursor()
 
             # Query para verificar se um pagamento existe
-            cursor.execute('SELECT payment_service_id FROM payments WHERE payment_service_id = %s', (payment_service_id,))
+            cursor.execute('SELECT payment_service_id FROM payments WHERE payment_service_id = %s',
+                           (payment_service_id,))
             result = cursor.fetchone()
 
             if result is not None:
