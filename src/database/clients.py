@@ -11,25 +11,23 @@ PASSWORD = os.getenv("PASSWORD")
 
 # Função para verificar se um cliente com um dado NIF já existe
 def existe_cliente(nif):
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='trabalho_final',
-            user='root',
-            password=PASSWORD
-        )
-        if connection.is_connected():
-            cursor = connection.cursor()
-            cursor.execute('SELECT client_nif FROM clients WHERE client_nif=%s', (nif,))
-            result = cursor.fetchone()
-            return result is None
-    except Error as err:
-        print(f"Erro ao conectar ao MySQL: {err}")
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("Conexão ao MySQL encerrada.")
+    connection = mysql.connector.connect(
+        host='localhost',
+        database='trabalho_final',
+        user='root',
+        password=PASSWORD
+    )
+
+    if connection.is_connected():
+        cursor = connection.cursor()
+
+        cursor.execute('SELECT client_nif FROM clients WHERE client_nif=%s', (nif,))
+        result = cursor.fetchone()
+        print(result)
+        if result is not None:
+            return True
+        else:
+            return False
 
 # Função para criar um novo cliente
 def create_client(client_name, client_address, client_nif, client_mobile, client_email):
