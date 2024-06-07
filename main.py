@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import PhotoImage
 import sys
 
-def main_window(role):
+def main_window(role, user_fullname):
     root = tk.Tk()
     root.title("Norauto")
     root.geometry("600x400")
@@ -49,6 +49,9 @@ def main_window(role):
     logo = PhotoImage(file="assets/logo.png", master=root)
     label_logo = tk.Label(root, image=logo, bg="#1f286d")
     label_logo.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+    bem_vindo = tk.Label(root, text=f"Bem-vindo, {user_fullname}", bg="#1f286d", fg="white", font=("Helvetica", 20, "bold"))
+    bem_vindo.place(relx=0.5, rely=0.15, anchor=tk.CENTER)
 
     root.mainloop()
 

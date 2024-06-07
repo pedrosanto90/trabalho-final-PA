@@ -210,3 +210,31 @@ def verify_login(user_name):
             cursor.close()
             connection.close()
             print("Conexão ao MySQL encerrada.")
+
+
+def login_fullname(user_name):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='trabalho_final',
+            user='root',
+            password=PASSWORD
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+
+            cursor.execute('SELECT user_fullname FROM users WHERE user_name = %s', (user_name,))
+            result = cursor.fetchone()
+
+            user_fullname = result[0]
+            return user_fullname
+
+    except Error as err:
+        print(f'Erro ao conectar a base de dados: {err}')
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Conexão ao MySQL encerrada.")

@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from main import main_window
-from src.database.users import verify_login
+from src.database.users import verify_login, login_fullname
 
 # Define path to images
 path = 'images'
@@ -84,9 +84,9 @@ def faceRec():
                     cap.release()
                     cv2.destroyAllWindows()
                     if verify_login(name) == "Operador":
-                        main_window("Operador")
+                        main_window("Operador", login_fullname(name))
                     else:
-                        main_window("Contabilidade")
+                        main_window("Contabilidade", login_fullname(name))
                     return  # Exit the function after calling main_window
 
             cv2.imshow('Webcam', img)
