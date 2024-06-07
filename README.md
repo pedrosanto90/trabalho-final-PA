@@ -11,7 +11,11 @@
 <br>
 
 ## Executar o projeto:
+Criar o ficheiro *.env* na raiz do projecto e colocar as seguintes variaveis de ambiente:
 
+```bash
+PASSWORD=<password>
+```
 Necessario criar diretorio *images* na raiz do projecto.
 
 Ao rodar o ficheiro app.py pela primeira vez, a base de dados e gerada automaticamente e o utilizador *admin* 
