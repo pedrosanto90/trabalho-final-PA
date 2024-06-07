@@ -25,6 +25,8 @@ e criado com a passoword *admin*.
 
 ## Executar a API:
 
+```bash
 python src/api/server.py
+```
 main endpont: http://127.0.0.1:5005/
 
