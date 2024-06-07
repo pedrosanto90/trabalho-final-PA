@@ -1,3 +1,4 @@
+# importa as biobliotecas
 from flask import Flask, jsonify
 from dotenv import load_dotenv
 import mysql.connector
@@ -5,12 +6,12 @@ import os
 
 load_dotenv()
 PASSWORD = os.getenv("PASSWORD")
-
+# verifica se a password esta definida no ficheiro .env
 if not PASSWORD:
     raise ValueError("No PASSWORD environment variable set")
 
 app = Flask(__name__)
-
+# conneca-se ao mysql
 def connect_db():
     connection = mysql.connector.connect( 
         host="localhost",
@@ -21,6 +22,7 @@ def connect_db():
     print('Database connected!')
     return connection
 
+# define a rota principal
 @app.route("/")
 def home():
     routes ={
@@ -30,6 +32,7 @@ def home():
     }
     return jsonify(routes)
 
+# define a rota dos clientes
 @app.route("/norauto/api/clients")
 def get_clients():
     try:
@@ -61,8 +64,8 @@ def get_clients():
             connection.close()
             print("conexão ao mysql encerrada.")
     
-    return jsonify({"error": "Unable to fetch clients"}), 500
-
+    return jsonify({"error": "Nao foi possivel obter dados"}), 500
+# define a rota dos pagamentos
 @app.route("/norauto/api/payments")
 def payments():
     try:
@@ -91,9 +94,9 @@ def payments():
             connection.close()
             print("conexão ao mysql encerrada.")
     
-    return jsonify({"error": "Unable to fetch payments"}), 500
+    return jsonify({"error": "Nao foi possivel obter dados"}), 500
 
-
+# define a rota dos servicos
 @app.route("/norauto/api/services")
 def services():
     try:
@@ -105,17 +108,6 @@ def services():
 
             cursor.execute("SELECT * FROM services")
             services = cursor.fetchall()
-    # mycursor.execute('CREATE TABLE services (service_id INT AUTO_INCREMENT PRIMARY KEY, \
-    # service_client_id INT, \
-    # service_type VARCHAR(50), \
-    # service_description VARCHAR(1024), \
-    # service_start_date DATE, \
-    # service_end_date DATE, \
-    # service_state INT, \
-    # service_price INT, \
-    # service_created DATE, \
-    # service_updated DATE, \
-    # FOREIGN KEY(service_client_id) REFERENCES clients(client_id))')
             services_dict = {service['service_id']: {
                 "service_client_id": service['service_client_id'],
                 "service_created": service['service_created'],
@@ -138,7 +130,7 @@ def services():
             connection.close()
             print("conexão ao mysql encerrada.")
     
-    return jsonify({"error": "Unable to fetch services"}), 500
+    return jsonify({"error": "Nao foi possivel obter dados"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005, debug=True)

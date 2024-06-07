@@ -18,7 +18,7 @@ def connect():
     print('Database connected!')
     return mydb
 
-
+# gera uma data aleatoria
 def generate_random_date(start, end):
     return (start + timedelta(days=random.randint(0, (end - start).days))).strftime('%Y-%m-%d')
 
@@ -29,7 +29,7 @@ def insert_data():
     start_date = datetime.strptime('2023-01-01', '%Y-%m-%d')
     end_date = datetime.strptime('2023-12-31', '%Y-%m-%d')
 
-    # Generate data for clients
+    # Gera dados para os clientes
     clients = [
         (f"Client {i}", f"{i} Main St", random.randint(100000000, 999999999), f"555-12{i:02d}", f"client{i}@example.com", generate_random_date(start_date, end_date))
         for i in range(1, 11)
@@ -39,7 +39,7 @@ def insert_data():
     mycursor.executemany(client_sql, clients)
     mydb.commit()
 
-    # Generate data for services
+    # Gera dados para os servicos
     services = [
         (random.randint(1, 10), f"Service Type {i}", f"Service description {i}", generate_random_date(start_date, end_date), generate_random_date(start_date, end_date), random.randint(0, 2), random.randint(100, 10000), generate_random_date(start_date, end_date), generate_random_date(start_date, end_date))
         for i in range(1, 11)
