@@ -1,4 +1,4 @@
-# importacao das bibliotecas e modulos necessarias
+# Importação dos módulos e bibliotecas
 import cv2
 import numpy as np
 import face_recognition

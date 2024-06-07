@@ -1,3 +1,4 @@
+# Importação dos módulos e bibliotecas
 import cv2
 
 def takePic(nome):
