@@ -1,10 +1,10 @@
 # Trabalho Final - Programação Avançada
 
 ## Desenvolvido por:
-Pedro Espirito Santo
-João Pinheiro 
-João Bagueixo
-Rodrigo Lucindo
+<p>Pedro Espirito Santo</p>
+<p>João Pinheiro Ferreira</p>
+<p>João Bagueixo Ferreira</p>
+<p>Rodrigo Lucindo</p>
 
 <br>
 <h3>Versao do python: 3.12.2</h3>
