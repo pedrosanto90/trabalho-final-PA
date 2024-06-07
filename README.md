@@ -21,9 +21,6 @@ Necessario criar diretorio *images* na raiz do projecto.
 Ao rodar o ficheiro app.py pela primeira vez, a base de dados e gerada automaticamente e o utilizador *admin* 
 e criado com a passoword *admin*.
 
-A base de dados vem vazia, para entroduzir os dados basta executar o ficheiro *insert_test_data.py*
-apos iniciar o programa a primeira vez (*app.py*)
-
 <br>
 
 ## Executar a API:
