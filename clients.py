@@ -1,13 +1,16 @@
+# Importação dos módulos e bibliotecas
 import tkinter as tk
-from tkinter import ttk
-from src.database.clients import *
-from tkinter import messagebox
+from tkinter import ttk, messagebox
 import re
-from src.database.clients import existe_cliente
+from src.database.clients import create_client, delete_client, list_clients, existe_cliente, verify_client
 
+
+# Função para adicionar um novo cliente
 def add_client():
     adicionar_cliente = tk.Toplevel()
     adicionar_cliente.title("Criar cliente")
+
+    # Labels e campos de entrada para os detalhes do cliente
     tk.Label(adicionar_cliente, text="Nome:").grid(row=0, column=0)
     tk.Label(adicionar_cliente, text="Morada:").grid(row=1, column=0)
     tk.Label(adicionar_cliente, text="NIF:").grid(row=2, column=0)
@@ -16,9 +19,11 @@ def add_client():
     eName = tk.Entry(adicionar_cliente)
     eAddress = tk.Entry(adicionar_cliente)
 
+    # Função para validar o comprimento de 9 caracteres
     def validar9char(P):
         return len(P) <= 9
 
+    # Configuração da validação de entrada para NIF e número de telefone
     valNif = (adicionar_cliente.register(validar9char), "%P")
     eNif = tk.Entry(adicionar_cliente, validate="key", validatecommand=valNif)
     valMobile = (adicionar_cliente.register(validar9char), "%P")
@@ -30,10 +35,12 @@ def add_client():
     eMobile.grid(row=3, column=1)
     eMail.grid(row=4, column=1)
 
+    # Função para validar o formato do email
     def validar_email(email):
         pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         return re.match(pattern, email) is not None
-    
+
+    # Função para adicionar o cliente à base de dados
     def adicionar():
         name = eName.get()
         address = eAddress.get()
@@ -50,7 +57,7 @@ def add_client():
             if not (mobile.isdigit() and len(mobile) == 9):
                 messagebox.showerror("Erro", "Número de telefone deve conter exatamente 9 dígitos.")
                 return
-            if not existe_cliente(nif):
+            if existe_cliente(nif):
                 messagebox.showerror("Erro", "Cliente já existe.")
                 return
             create_client(name, address, nif, mobile, mail)
@@ -59,16 +66,22 @@ def add_client():
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
 
+    # Botão para adicionar o cliente
     tk.Button(adicionar_cliente, text="Adicionar", command=adicionar).grid(row=5, columnspan=2)
     adicionar_cliente.mainloop()
 
+
+# Função para remover um cliente existente
 def remove_client():
     remover_cliente = tk.Toplevel()
     remover_cliente.title("Remover cliente")
+
+    # Label e campo de entrada para o ID do cliente
     tk.Label(remover_cliente, text="ID do cliente:").grid(row=0, column=0)
     eID = tk.Entry(remover_cliente)
     eID.grid(row=0, column=1)
 
+    # Função para remover o cliente da base de dados
     def remover():
         id = eID.get()
         if id:
@@ -81,13 +94,17 @@ def remove_client():
         else:
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
 
+    # Botão para remover o cliente
     tk.Button(remover_cliente, text="Remover", command=remover).grid(row=3, columnspan=2)
     remover_cliente.mainloop()
 
+
+# Função para listar todos os clientes
 def list_all_clients():
     listar_clients = tk.Toplevel()
     listar_clients.title("Lista de Clientes")
 
+    # Labels para os cabeçalhos das colunas
     tk.Label(listar_clients, text="ID").grid(row=0, column=0)
     tk.Label(listar_clients, text="Nome").grid(row=0, column=1)
     tk.Label(listar_clients, text="Morada").grid(row=0, column=2)
@@ -96,13 +113,16 @@ def list_all_clients():
     tk.Label(listar_clients, text="Email").grid(row=0, column=5)
     tk.Label(listar_clients, text="Criado a").grid(row=0, column=6)
 
+    # Obtém a lista de clientes da base de dados
     clients = list_clients()
 
+    # Verificação se há clientes para mostrar
     if not clients:
         messagebox.showinfo("Info", "Não há clientes para mostrar.")
         listar_clients.destroy()
         return
 
+    # Preenchimento dos dados dos clientes nas colunas correspondentes
     for i, element in enumerate(clients, start=1):
         id, name, address, nif, phone, email, created = element
         tk.Label(listar_clients, text=id).grid(row=i, column=0)
