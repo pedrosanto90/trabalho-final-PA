@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-#import face_recognition
+import face_recognition
 import os
 from main import main_window
 from src.database.users import verify_login
