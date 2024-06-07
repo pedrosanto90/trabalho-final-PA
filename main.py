@@ -1,3 +1,4 @@
+# Importação dos módulos e bibliotecas
 from users import add_user, remove_user, change_password, update_photo
 from payments import finish_payment, list_all_payments
 from services import create_service_page, update_service_page, list_service_page
@@ -5,6 +6,7 @@ from clients import add_client, remove_client, list_all_clients
 import tkinter as tk
 from tkinter import PhotoImage
 import sys
+
 
 def main_window(role, user_fullname):
     root = tk.Tk()
